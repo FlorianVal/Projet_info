@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package projet;
+package Calendar;
 
 import java.util.Arrays;
 
@@ -11,7 +11,7 @@ import java.util.Arrays;
  *
  * @author florianvalade
  */
-public class Projet {
+public class Calendar {
 
     /**
      * @param args the command line arguments
