@@ -22,6 +22,7 @@ public class Calendar {
         System.out.print(rdv1.toString());
         //TODO find agenda on disk
         Agenda[] agenda;
+        //TODO arraylist not tab
         agenda = new Agenda[100];
         agenda[0] = new Agenda("Florian");
         //menu
@@ -52,6 +53,7 @@ public class Calendar {
                             if(agenda[i] != null){
                                 System.out.println(agenda[i].toString());}
                         }
+                        //create menu for rdv
                         choix = 0;
                         break;
                     case 3:
@@ -59,7 +61,7 @@ public class Calendar {
                         break;
                     default:
                         choix = 0;
-                        System.out.println("please choose between 1 and 2");
+                        System.out.println("please choose between 1, 2 or 3");
                         break;
             
             }
