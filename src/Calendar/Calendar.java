@@ -6,7 +6,7 @@
 package Calendar;
 
 import java.util.*;
-
+import java.util.Arrays;
 /**
  *
  * @author florianvalade
@@ -22,7 +22,7 @@ public class Calendar {
         System.out.print(rdv1.toString());
         //TODO find agenda on disk
         Agenda[] agenda;
-        agenda = new Agenda[10];
+        agenda = new Agenda[100];
         agenda[0] = new Agenda("Florian");
         //menu
         menu_agenda(agenda);
@@ -36,10 +36,19 @@ public class Calendar {
             switch(choix){
                     case 1:
                         System.out.println("Rentrez votre nom :");
-                        String nom = scan.next();
+                        String name = scan.next();
+                        Agenda new_agenda; 
+                        new_agenda = new Agenda(name);
+                        for (int j=0; j<100; j++){
+                            if(agenda[j] == null){
+                                agenda[j]= new_agenda;
+                                break;
+                            }
+                        }
+                        choix = 0;
                         break;
                     case 2:
-                        for (int i =0; i<10; i++){
+                        for (int i =0; i<100; i++){
                             if(agenda[i] != null){
                                 System.out.print(agenda[i].toString());}
                         }
