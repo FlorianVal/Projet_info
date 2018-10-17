@@ -27,14 +27,18 @@ public class RendezVous {
             Date date_given = new Date(year, month, day);
             System.out.print(date_given);
             System.out.print("\n");
+            System.out.print(date_now);
+            System.out.print("\n");
             if (date_now.after(date_given) == true){            
-                System.out.print("Date given is before today's date");
+                System.out.print("Date given is before today's date\n");
+                return ;
             }
         }
         else
         {
-            System.out.print("Problem creating RendezVous please use date format jj/mm/aaaa");
+            System.out.print("Problem creating RendezVous please use date format jj/mm/aaaa\n");
         }
+        System.out.print("rdv created !\n");
         this.date = date;
         this.h_start = h_start;
         this.h_end = h_end;
@@ -80,6 +84,11 @@ public class RendezVous {
 
     public void setLabel(String label) {
         this.label = label;
+    }
+
+    @Override
+    public String toString() {
+        return "date=" + date + ", h_start=" + h_start + ", h_end=" + h_end + ", label=" + label + ", reminder=" + reminder ;
     }
     
     
