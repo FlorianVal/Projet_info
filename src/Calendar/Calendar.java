@@ -31,7 +31,7 @@ public class Calendar {
         Scanner scan = new Scanner(System.in);
         int choix = 0;
         while (choix == 0){
-            System.out.println("Menu :\n 1-Créer un Agenda\n 2- Ouvrir un Agenda");
+            System.out.println("Menu :\n 1-Créer un Agenda\n 2- Ouvrir un Agenda\n 3- quitter");
             choix = scan.nextInt();
             switch(choix){
                     case 1:
@@ -50,8 +50,12 @@ public class Calendar {
                     case 2:
                         for (int i =0; i<100; i++){
                             if(agenda[i] != null){
-                                System.out.print(agenda[i].toString());}
+                                System.out.println(agenda[i].toString());}
                         }
+                        choix = 0;
+                        break;
+                    case 3:
+                        System.out.print("exiting");
                         break;
                     default:
                         choix = 0;
