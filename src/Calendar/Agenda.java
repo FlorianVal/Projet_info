@@ -15,5 +15,11 @@ public class Agenda {
 
     public Agenda(String username) {
         this.username = username;
-    }   
+    }
+
+    @Override
+    public String toString() {
+        return "Agenda{" + "username=" + username + ", rdv=" + rdv + '}';
+    }
+    
 }

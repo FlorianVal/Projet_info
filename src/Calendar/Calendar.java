@@ -20,24 +20,35 @@ public class Calendar {
         //test add rdv
         RendezVous rdv1 = new RendezVous("17/03/2018","17:00","17:30");
         System.out.print(rdv1.toString());
+        //TODO find agenda on disk
+        Agenda[] agenda;
+        agenda = new Agenda[10];
+        agenda[0] = new Agenda("Florian");
         //menu
-        menu_agenda();
+        menu_agenda(agenda);
     }
-    public static void menu_agenda(){      
+    public static void menu_agenda(Agenda[] agenda){      
         Scanner scan = new Scanner(System.in);
         int choix = 0;
         while (choix == 0){
             System.out.println("Menu :\n 1-Créer un Agenda\n 2- Ouvrir un Agenda");
             choix = scan.nextInt();
-            if(choix != 1 && choix != 2 ){
-                choix = 0;
-                System.out.println("please choose between 1 and 2");
-            }
-            if(choix == 1){
-                System.out.println("Rentrez votre nom :");
-                String nom = scan.next();
-                Agenda agenda = new Agenda(nom);
-
+            switch(choix){
+                    case 1:
+                        System.out.println("Rentrez votre nom :");
+                        String nom = scan.next();
+                        break;
+                    case 2:
+                        for (int i =0; i<10; i++){
+                            if(agenda[i] != null){
+                                System.out.print(agenda[i].toString());}
+                        }
+                        break;
+                    default:
+                        choix = 0;
+                        System.out.println("please choose between 1 and 2");
+                        break;
+            
             }
         }
     }
