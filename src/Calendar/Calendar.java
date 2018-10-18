@@ -67,8 +67,9 @@ public class Calendar {
                             if(agendas.get(i).getUsername().equals(name_agenda)){
                                 System.out.println("agenda found with rdvs :");
                                 //list rdvs of agenda
-                                get_rdvs(agendas.get(i));
+                                get_print_rdvs(agendas.get(i));
                         }}
+                        //temporary then go in rdv menu
                         choix = 0;
                         break;
                     case 3:
@@ -84,7 +85,7 @@ public class Calendar {
     }
     
     
-    public static List<RendezVous> get_rdvs(Agenda agenda){
+    public static List<RendezVous> get_print_rdvs(Agenda agenda){
         List<RendezVous> rdv_agenda;
         rdv_agenda = agenda.getRdv();
         
