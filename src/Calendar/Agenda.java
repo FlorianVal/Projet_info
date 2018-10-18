@@ -17,9 +17,23 @@ public class Agenda {
         this.username = username;
     }
 
+    public Agenda(String username, RendezVous[] rdv) {
+        this.username = username;
+        this.rdv = rdv;
+    }
+
     @Override
     public String toString() {
         return "Agenda{" + "username=" + username + ", rdv=" + rdv + '}';
     }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public RendezVous[] getRdv() {
+        return rdv;
+    }
+    
     
 }

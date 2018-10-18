@@ -22,9 +22,13 @@ public class Calendar {
         System.out.print(rdv1.toString());
         //TODO find agenda on disk
         Agenda[] agenda;
+        RendezVous[] rdvs;
+        rdvs = new RendezVous[100];
+        rdvs[0] = rdv1;
+        rdvs[1] = rdv1;
         //TODO arraylist not tab
         agenda = new Agenda[100];
-        agenda[0] = new Agenda("Florian");
+        agenda[0] = new Agenda("Florian",rdvs);
         //menu
         menu_agenda(agenda);
     }
@@ -52,6 +56,17 @@ public class Calendar {
                         for (int i =0; i<100; i++){
                             if(agenda[i] != null){
                                 System.out.println(agenda[i].toString());}
+                        }
+                        System.out.println("Rentrez votre nom :");
+                        String name_agenda = scan.next();
+                        for (int i =0; i<100; i++){
+                            if(agenda[i] != null){
+                                System.out.println(agenda[i].getUsername());
+                                System.out.println(name_agenda);
+                                if(agenda[i].getUsername() == name_agenda){
+                                    System.out.print("agenda foundwith rdv :");
+                                    System.out.print(agenda[i].getRdv().toString());
+                                }}
                         }
                         //create menu for rdv
                         choix = 0;
