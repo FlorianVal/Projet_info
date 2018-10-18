@@ -24,7 +24,9 @@ public class Calendar {
         RendezVous[] rdvs;
         rdvs = new RendezVous[100];
         rdvs[0] = rdv1;
-        rdvs[1] = rdv1;
+        rdvs[1] = rdv1;    
+        rdvs[1].setLabel("Le deuxième :)");
+
         //TODO arraylist not tab
         agenda = new Agenda[100];
         agenda[0] = new Agenda("Florian",rdvs);
@@ -63,8 +65,8 @@ public class Calendar {
                         for (int i =0; i<100; i++){
                             if(agenda[i] != null){
                                 if(agenda[i].getUsername().equals(name_agenda)){
-                                    System.out.println("agenda foundwith rdvs :");
-                                    rdv_agenda = agenda[i].getRdv();
+                                    System.out.println("agenda found with rdvs :");
+                                    get_rdvs(agenda[i]);
                                     //taking rdvs from rdv in agenda
                                     
                                 }}
@@ -82,7 +84,7 @@ public class Calendar {
             }
         }
     }
-    public static void get_rdvs(Agenda agenda){
+    public static RendezVous[] get_rdvs(Agenda agenda){
         RendezVous[] rdv_agenda;
         rdv_agenda = new RendezVous[100];
         rdv_agenda = agenda.getRdv();
@@ -90,5 +92,6 @@ public class Calendar {
             if (rdv_agenda[j] != null){
                 System.out.println(rdv_agenda[j].toString());
         }}
+        return rdv_agenda;
     }
 }
