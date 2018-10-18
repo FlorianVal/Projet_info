@@ -18,24 +18,18 @@ public class RendezVous {
     
     public RendezVous(String date, String h_start, String h_end) {
         // check if date is valid
-        if (date.split("/")[0] != date || date.length() != 10)
-        {
+        if (date.split("/")[0] != date || date.length() != 10){
             Date date_now = new Date();
             int day = Integer.parseInt(date.split("/")[0]);
             int month = Integer.parseInt(date.split("/")[1]) - 1;
             int year = Integer.parseInt(date.split("/")[2]) - 1900;
             Date date_given = new Date(year, month, day);
-            System.out.print(date_given);
-            System.out.print("\n");
-            System.out.print(date_now);
-            System.out.print("\n");
             if (date_now.after(date_given) == true){            
                 System.out.print("Date given is before today's date\n");
                 return ;
             }
         }
-        else
-        {
+        else{
             System.out.print("Problem creating RendezVous please use date format jj/mm/aaaa\n");
         }
         System.out.print("rdv created !\n");

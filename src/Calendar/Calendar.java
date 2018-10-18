@@ -18,8 +18,7 @@ public class Calendar {
      */
     public static void main(String[] args) {
         //test add rdv
-        RendezVous rdv1 = new RendezVous("17/03/2018","17:00","17:30");
-        System.out.print(rdv1.toString());
+        RendezVous rdv1 = new RendezVous("17/12/2018","17:00","17:30");
         //TODO find agenda on disk
         Agenda[] agenda;
         RendezVous[] rdvs;
@@ -43,6 +42,8 @@ public class Calendar {
                         System.out.println("Rentrez votre nom :");
                         String name = scan.next();
                         Agenda new_agenda; 
+                        RendezVous[] rdv_agenda;
+                        rdv_agenda = new RendezVous[100];
                         new_agenda = new Agenda(name);
                         for (int j=0; j<100; j++){
                             if(agenda[j] == null){
@@ -61,11 +62,14 @@ public class Calendar {
                         String name_agenda = scan.next();
                         for (int i =0; i<100; i++){
                             if(agenda[i] != null){
-                                System.out.println(agenda[i].getUsername());
-                                System.out.println(name_agenda);
-                                if(agenda[i].getUsername() == name_agenda){
-                                    System.out.print("agenda foundwith rdv :");
-                                    System.out.print(agenda[i].getRdv().toString());
+                                if(agenda[i].getUsername().equals(name_agenda)){
+                                    System.out.println("agenda foundwith rdvs :");
+                                    rdv_agenda = agenda[i].getRdv();
+                                    //taking rdvs from rdv in agenda
+                                    for(int j = 0; j<100; j++){
+                                        if (rdv_agenda[j] != null){
+                                            System.out.println(rdv_agenda[j].toString());
+                                    }}
                                 }}
                         }
                         //create menu for rdv
