@@ -17,23 +17,23 @@ public class Calendar {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //test add rdv
+        //rdv init
+        
         RendezVous rdv1 = new RendezVous("17/12/2018","17:00","17:30");
         //TODO find agenda on disk
-        Agenda[] agenda;
-        RendezVous[] rdvs;
-        rdvs = new RendezVous[100];
-        rdvs[0] = rdv1;
-        rdvs[1] = rdv1;    
-        rdvs[1].setLabel("Le deuxième :)");
+        // list rdv init
+        List<RendezVous> rdvs = new ArrayList<>();
+        rdvs.add(rdv1);
+        rdvs.add(rdv1);    
+        rdvs.get(1).setLabel("Le deuxième :)");
 
-        //TODO arraylist not tab
-        agenda = new Agenda[100];
-        agenda[0] = new Agenda("Florian",rdvs);
+        //init agenda list
+        List<Agenda> agendas = new ArrayList<>();
+        agendas.add(new Agenda("Florian",rdvs));
         //menu
-        menu_agenda(agenda);
+        menu_agenda(agendas);
     }
-    public static void menu_agenda(Agenda[] agenda){      
+    public static void menu_agenda(List<Agenda> agendas){      
         Scanner scan = new Scanner(System.in);
         int choix = 0;
         while (choix == 0){
@@ -41,40 +41,38 @@ public class Calendar {
             choix = scan.nextInt();
             switch(choix){
                     case 1:
+                        //add new agenda in agenda list
                         System.out.println("Rentrez votre nom :");
-                        String name = scan.next();
-                        Agenda new_agenda; 
+                        String name = scan.next();  
                         
+                        //create new agenda with name of user
+                        Agenda new_agenda; 
                         new_agenda = new Agenda(name);
-                        for (int j=0; j<100; j++){
-                            if(agenda[j] == null){
-                                agenda[j]= new_agenda;
-                                break;
-                            }
-                        }
+                        
+                        //add to list
+                        agendas.add(new_agenda);
+                        
                         choix = 0;
                         break;
                     case 2:
-                        // print all agenda in memory
-                        for (int i =0; i<100; i++){
-                            if(agenda[i] != null){
-                                System.out.println(agenda[i].toString());}
-                        }
-                        System.out.println("Rentrez votre nom :");
+                        // print all agenda in memory  
+                        System.out.println("Users found :");
+                        for (int i =0; i<agendas.size(); i++){
+                            System.out.println(agendas.get(i).getUsername());}
+                        System.out.println("\nRentrez votre nom :");
                         String name_agenda = scan.next();
-                        for (int i =0; i<100; i++){
-                            if(agenda[i] != null){
-                                if(agenda[i].getUsername().equals(name_agenda)){
-                                    System.out.println("agenda found with rdvs :");
-                                    get_rdvs(agenda[i]);
-                                    //taking rdvs from rdv in agenda
-                                    
-                                }}
-                        }
+                        //search in agenda list the right one
+                        for (int i =0; i<agendas.size(); i++){
+                            //if the name of agenda is the right one
+                            if(agendas.get(i).getUsername().equals(name_agenda)){
+                                System.out.println("agenda found with rdvs :");
+                                //list rdvs of agenda
+                                get_rdvs(agendas.get(i));
+                        }}
                         choix = 0;
                         break;
                     case 3:
-                        System.out.print("exiting");
+                        System.out.print("exiting\n");
                         break;
                     default:
                         choix = 0;
@@ -84,14 +82,18 @@ public class Calendar {
             }
         }
     }
-    public static RendezVous[] get_rdvs(Agenda agenda){
-        RendezVous[] rdv_agenda;
-        rdv_agenda = new RendezVous[100];
+    
+    
+    public static List<RendezVous> get_rdvs(Agenda agenda){
+        List<RendezVous> rdv_agenda;
         rdv_agenda = agenda.getRdv();
-        for(int j = 0; j<100; j++){
-            if (rdv_agenda[j] != null){
-                System.out.println(rdv_agenda[j].toString());
+        
+        // if rdvs exist print them and return them
+        if(rdv_agenda != null){
+        for(int j = 0; j<rdv_agenda.size(); j++){
+            System.out.println(rdv_agenda.get(j).toString());
         }}
+        else{System.out.println("No rdv found");}
         return rdv_agenda;
     }
 }

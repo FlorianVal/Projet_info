@@ -5,19 +5,21 @@
  */
 package Calendar;
 
+import java.util.List;
+
 /**
  *
  * @author florianvalade
  */
 public class Agenda {
     private String username;
-    private RendezVous[] rdv;
+    private List<RendezVous> rdv;
 
     public Agenda(String username) {
         this.username = username;
     }
 
-    public Agenda(String username, RendezVous[] rdv) {
+    public Agenda(String username, List<RendezVous> rdv) {
         this.username = username;
         this.rdv = rdv;
     }
@@ -31,7 +33,7 @@ public class Agenda {
         return username;
     }
 
-    public RendezVous[] getRdv() {
+    public List<RendezVous> getRdv() {
         return rdv;
     }
     
