@@ -42,8 +42,7 @@ public class Calendar {
                         System.out.println("Rentrez votre nom :");
                         String name = scan.next();
                         Agenda new_agenda; 
-                        RendezVous[] rdv_agenda;
-                        rdv_agenda = new RendezVous[100];
+                        
                         new_agenda = new Agenda(name);
                         for (int j=0; j<100; j++){
                             if(agenda[j] == null){
@@ -54,6 +53,7 @@ public class Calendar {
                         choix = 0;
                         break;
                     case 2:
+                        // print all agenda in memory
                         for (int i =0; i<100; i++){
                             if(agenda[i] != null){
                                 System.out.println(agenda[i].toString());}
@@ -66,13 +66,9 @@ public class Calendar {
                                     System.out.println("agenda foundwith rdvs :");
                                     rdv_agenda = agenda[i].getRdv();
                                     //taking rdvs from rdv in agenda
-                                    for(int j = 0; j<100; j++){
-                                        if (rdv_agenda[j] != null){
-                                            System.out.println(rdv_agenda[j].toString());
-                                    }}
+                                    
                                 }}
                         }
-                        //create menu for rdv
                         choix = 0;
                         break;
                     case 3:
@@ -85,5 +81,14 @@ public class Calendar {
             
             }
         }
+    }
+    public static void get_rdvs(Agenda agenda){
+        RendezVous[] rdv_agenda;
+        rdv_agenda = new RendezVous[100];
+        rdv_agenda = agenda.getRdv();
+        for(int j = 0; j<100; j++){
+            if (rdv_agenda[j] != null){
+                System.out.println(rdv_agenda[j].toString());
+        }}
     }
 }
