@@ -16,6 +16,7 @@ public class Calendar {
     /**
      * @param args the command line arguments
      */
+   static Agenda setAgenda;
     public static void main(String[] args) {
         //rdv init
         
@@ -33,6 +34,7 @@ public class Calendar {
         agendas.add(new Agenda("Florian",rdvs));
         //menu
         menu_agenda(agendas);
+        
     }
     public static void menu_agenda(List<Agenda> agendas){      
         Scanner scan = new Scanner(System.in);
@@ -78,6 +80,8 @@ public class Calendar {
                                 //list rdvs of agenda
                                 get_print_rdvs(agendas.get(i));
                                 agenda_number = i;
+                                setAgenda = agendas.get(i);
+                                break; 
                         }}
                         //temporary then go in rdv menu
                         if (agenda_number != -1){
@@ -86,23 +90,25 @@ public class Calendar {
                         System.out.println(status);
                         choix = 0;
                         break;
+                    
                     case 3:
                         System.out.print("exiting\n");
                         break;
                     default:
                         choix = 0;
-                        System.out.println("please choose between 1, 2 or 3");
+                        System.out.println("Veuillez choisir une option 1, 2 or 3");
                         break;
             
             }
         }
     }
+    
     public static int menu_rdv(List<RendezVous> rdv){
         Scanner scan = new Scanner(System.in);
         int status = -1;
         int choix_rdv = 0;        
         while(status == -1){
-            System.out.println("Menu :\n 1-Créer un rdv\n 2- editer un rdv\n 3- quitter");
+            System.out.println("Menu :\n 1-Créer un rdv\n 2- editer un rdv\n 3-  Actualiser la liste de rendez-vous\n 4- quitter");
             choix_rdv = scan.nextInt();
             switch(choix_rdv){
                 case 1:
@@ -120,7 +126,12 @@ public class Calendar {
                     new_rdv = new RendezVous(date,h_start,h_end);
                     rdv.add(new_rdv);
                     break;
+               
                 case 3:
+                    System.out.println("Acctualisation de la liste de RDV ...\n");
+                    get_print_rdvs(setAgenda);                
+                    
+                case 4:
                     status = 1;
                     break;
             }
