@@ -39,7 +39,7 @@ public class Calendar {
         int choix = 0;
         int status = 0;
         while (choix == 0){
-            if (status!=0){
+            if (status != 0){
                 // exiting loop if menu_rdv ask it
                 System.out.println("exiting by status");
                 choix = -1;
@@ -82,6 +82,8 @@ public class Calendar {
                         //temporary then go in rdv menu
                         if (agenda_number != -1){
                             status = menu_rdv(agendas.get(agenda_number).getRdv());}
+                        System.out.println(choix);
+                        System.out.println(status);
                         choix = 0;
                         break;
                     case 3:
@@ -117,8 +119,10 @@ public class Calendar {
                     h_end = scan.next();
                     new_rdv = new RendezVous(date,h_start,h_end);
                     rdv.add(new_rdv);
+                    break;
                 case 3:
-                    status = 0;
+                    status = 1;
+                    break;
             }
         }
         return status;
