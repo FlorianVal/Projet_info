@@ -20,12 +20,13 @@ public class Calendar {
         //rdv init
         
         RendezVous rdv1 = new RendezVous("17/12/2018","17:00","17:30");
+        RendezVous rdv2 = new RendezVous("17/12/2018","17:00","17:30");
         //TODO find agenda on disk
         // list rdv init
         List<RendezVous> rdvs = new ArrayList<>();
         rdvs.add(rdv1);
-        rdvs.add(rdv1);    
-        rdvs.get(1).setLabel("Le deuxième :)");
+        rdvs.add(rdv2);    
+        rdvs.get(0).setLabel("Le deuxième :)");
 
         //init agenda list
         List<Agenda> agendas = new ArrayList<>();
@@ -36,7 +37,14 @@ public class Calendar {
     public static void menu_agenda(List<Agenda> agendas){      
         Scanner scan = new Scanner(System.in);
         int choix = 0;
+        int status = 0;
         while (choix == 0){
+            if (status!=0){
+                // exiting loop if menu_rdv ask it
+                System.out.println("exiting by status");
+                choix = -1;
+                continue;
+            }
             System.out.println("Menu :\n 1-Créer un Agenda\n 2- Ouvrir un Agenda\n 3- quitter");
             choix = scan.nextInt();
             switch(choix){
@@ -57,6 +65,7 @@ public class Calendar {
                     case 2:
                         // print all agenda in memory  
                         System.out.println("Users found :");
+                        int agenda_number = -1;
                         for (int i =0; i<agendas.size(); i++){
                             System.out.println(agendas.get(i).getUsername());}
                         System.out.println("\nRentrez votre nom :");
@@ -68,8 +77,11 @@ public class Calendar {
                                 System.out.println("agenda found with rdvs :");
                                 //list rdvs of agenda
                                 get_print_rdvs(agendas.get(i));
+                                agenda_number = i;
                         }}
                         //temporary then go in rdv menu
+                        if (agenda_number != -1){
+                            status = menu_rdv(agendas.get(agenda_number).getRdv());}
                         choix = 0;
                         break;
                     case 3:
@@ -83,8 +95,34 @@ public class Calendar {
             }
         }
     }
-    
-    
+    public static int menu_rdv(List<RendezVous> rdv){
+        Scanner scan = new Scanner(System.in);
+        int status = -1;
+        int choix_rdv = 0;        
+        while(status == -1){
+            System.out.println("Menu :\n 1-Créer un rdv\n 2- editer un rdv\n 3- quitter");
+            choix_rdv = scan.nextInt();
+            switch(choix_rdv){
+                case 1:
+                    String date;
+                    String h_start;
+                    String h_end;
+                    RendezVous new_rdv;
+                    
+                    System.out.println("Entrez la date :");
+                    date = scan.next();
+                    System.out.println("Entrez l'heure de début");
+                    h_start = scan.next();
+                    System.out.println("Entrez l'heure de fin");
+                    h_end = scan.next();
+                    new_rdv = new RendezVous(date,h_start,h_end);
+                    rdv.add(new_rdv);
+                case 3:
+                    status = 0;
+            }
+        }
+        return status;
+    }
     public static List<RendezVous> get_print_rdvs(Agenda agenda){
         List<RendezVous> rdv_agenda;
         rdv_agenda = agenda.getRdv();
