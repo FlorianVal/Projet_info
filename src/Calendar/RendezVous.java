@@ -26,7 +26,7 @@ public class RendezVous {
     }
     
     static public boolean CheckDate(String date){
-        if (date.split("/")[0] != date && date.length() != 10){
+        if (date.split("/")[0] != date && date.length() == 10){
             Date date_now = new Date();
             try{
             int day = Integer.parseInt(date.split("/")[0]);

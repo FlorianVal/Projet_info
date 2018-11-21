@@ -140,8 +140,8 @@ public class Calendar {
                         System.out.println(rdv.get(i).toString());
                     }
                     rdv_to_edit =  scan.nextInt();
-                    rdv_to_edit +=1;
-                    if(rdv_to_edit < rdv.size() && rdv_to_edit >0){
+                    rdv_to_edit -= 1;
+                    if(rdv_to_edit < rdv.size() && rdv_to_edit >=0){
                         System.out.print("changement sur : ");
                         System.out.println(rdv.get(rdv_to_edit));
                         edit_rdv(rdv.get(rdv_to_edit),scan);
