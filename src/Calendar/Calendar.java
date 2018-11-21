@@ -145,7 +145,8 @@ public class Calendar {
                     
                 case 3:
                     System.out.println("Acctualisation de la liste de RDV ...\n");
-                    get_print_rdvs(setAgenda);                
+                    get_print_rdvs(setAgenda); 
+                    break; 
                     
                 case 4:
                     status = 1;
