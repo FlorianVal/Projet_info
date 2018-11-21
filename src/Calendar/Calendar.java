@@ -185,15 +185,33 @@ public class Calendar {
         int choice;
         String new_date;
         System.out.println("Que changez ?");
-        System.out.println("1- Date \n2- Heure de début\n3- Heure de fin\n4- label\n5- reminder");
+        System.out.println("1- Date \n2- Heure de début\n3- Heure de fin\n4- label");
         choice = scan.nextInt();
         switch(choice){
             case 1:
                 System.out.println("Nouvelle date :");
                 new_date = scan.next();
                 rdv.setDate(new_date);
-
-        }
+                break;
+            case 2:
+                System.out.println("Nouvelle Heure de début :");
+                new_date = scan.next();
+                rdv.setH_start(new_date);
+                break;
+            case 3:
+                System.out.println("Nouvelle Heure de fin :");
+                new_date = scan.next();
+                rdv.setH_end(new_date);
+                break;
+            case 4:
+                System.out.println("Nouveau label :");
+                new_date = scan.next();
+                rdv.setLabel(new_date);
+                break;
+            default:
+                System.out.println("not understood");
+                break;
+        }       
 
         
     
