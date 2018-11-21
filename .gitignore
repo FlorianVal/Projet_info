@@ -4,3 +4,8 @@
 nbproject/
 /dist/
 *.class
+build/
+build/classes/Calendar/Agenda.class
+build/classes/Calendar/Calendar.class
+build/classes/Calendar/RendezVous.class
+build/built-jar.properties

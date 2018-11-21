@@ -110,7 +110,7 @@ public class Calendar {
             System.out.println("Menu :\n 1-Créer un rdv\n 2- editer un rdv\n 3- Supprimer un RDV \n 4-  Actualiser la liste de rendez-vous\n 5- quitter");
             choix_rdv = scan.nextInt();
             switch(choix_rdv){
-                case 1:
+                case 1: /* Créeation d'un nouveau rendez vous */ 
                     String date;
                     String h_start;
                     String h_end;
@@ -127,7 +127,7 @@ public class Calendar {
                     break;
                
 
-                case 2: 
+                case 2: /* Edition d'un rendez vous */ 
                     int rdv_to_edit;
                     System.out.println("Quel rdv voulez vous changer ?");
                     for (int i =0; i < rdv.size(); i++){
@@ -143,7 +143,7 @@ public class Calendar {
                     }
                     break;
                     
-                case 3: 
+                case 3: /* Supression d'un rendez vous */   
                     int rdv_to_delete; 
                     System.out.println("Quel rdv voulez vous supprimer");
                      for (int i =0; i < rdv.size(); i++){
@@ -162,12 +162,12 @@ public class Calendar {
                     }
                     break; 
                     
-                case 4:
+                case 4: /* Acctualisation d'un rendez vous */ 
                     System.out.println("Acctualisation de la liste de RDV ...\n");
                     get_print_rdvs(setAgenda); 
                     break; 
                     
-                case 5:
+                case 5: 
                     status = 1;
                     break;
             }
