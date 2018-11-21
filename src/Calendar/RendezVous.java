@@ -48,6 +48,7 @@ public class RendezVous {
         this.label = label;
     }
 
+
     public String getDate() {
         return date;
     }
