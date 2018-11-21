@@ -191,7 +191,9 @@ public class Calendar {
             case 1:
                 System.out.println("Nouvelle date :");
                 new_date = scan.next();
-                rdv.setDate(new_date);
+                while(rdv.setDate(new_date)== false){
+                    new_date = scan.next();
+                };
                 break;
             case 2:
                 System.out.println("Nouvelle Heure de début :");

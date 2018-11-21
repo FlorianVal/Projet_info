@@ -18,11 +18,13 @@ public class RendezVous {
     
     public RendezVous(String date, String h_start, String h_end) {
         // check if date is valid
-        CheckDate(date);
-        System.out.print("rdv created !\n");
-        this.date = date;
-        this.h_start = h_start;
-        this.h_end = h_end;
+        if(CheckDate(date)){
+            System.out.print("rdv created !\n");
+            this.date = date;
+            this.h_start = h_start;
+            this.h_end = h_end;
+        }
+        System.out.println("Problème date");
     }
     
     static public boolean CheckDate(String date){
@@ -66,9 +68,11 @@ public class RendezVous {
         return date;
     }
 
-    public void setDate(String date) {
+    public boolean setDate(String date) {
         if(CheckDate(date)){
-            this.date = date;}
+            this.date = date;
+            return true;}
+        else{return false;}
     }
 
     public String getH_start() {
