@@ -4,8 +4,10 @@
 nbproject/
 /dist/
 *.class
-build/
 build/classes/Calendar/Agenda.class
 build/classes/Calendar/Calendar.class
 build/classes/Calendar/RendezVous.class
 build/built-jar.properties
+build/classes/.netbeans_automatic_build
+build/classes/.netbeans_update_resources
+build/
