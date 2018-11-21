@@ -18,25 +18,38 @@ public class RendezVous {
     
     public RendezVous(String date, String h_start, String h_end) {
         // check if date is valid
-        if (date.split("/")[0] != date || date.length() != 10){
+        CheckDate(date);
+        System.out.print("rdv created !\n");
+        this.date = date;
+        this.h_start = h_start;
+        this.h_end = h_end;
+    }
+    
+    static public boolean CheckDate(String date){
+        if (date.split("/")[0] != date && date.length() != 10){
             Date date_now = new Date();
+            try{
             int day = Integer.parseInt(date.split("/")[0]);
             int month = Integer.parseInt(date.split("/")[1]) - 1;
             int year = Integer.parseInt(date.split("/")[2]) - 1900;
             Date date_given = new Date(year, month, day);
             if (date_now.after(date_given) == true){            
                 System.out.print("Date given is before today's date\n");
-                return ;
-            }
-        }
+                return false;
+                }
+            else {
+                return true;
+            }}
+            catch(java.lang.NumberFormatException e){
+                System.out.println("Invalid input");
+                return false;
+                }}
         else{
             System.out.print("Problem creating RendezVous please use date format jj/mm/aaaa\n");
+            return false;
         }
-        System.out.print("rdv created !\n");
-        this.date = date;
-        this.h_start = h_start;
-        this.h_end = h_end;
     }
+    
     
     public RendezVous(String date, String h_start, String h_end, boolean reminder) {
         this(date, h_start, h_end);
@@ -53,7 +66,8 @@ public class RendezVous {
     }
 
     public void setDate(String date) {
-        this.date = date;
+        if(CheckDate(date)){
+            this.date = date;}
     }
 
     public String getH_start() {

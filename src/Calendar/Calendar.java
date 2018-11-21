@@ -86,7 +86,7 @@ public class Calendar {
                         }}
                         //temporary then go in rdv menu
                         if (agenda_number != -1){
-                            status = menu_rdv(agendas.get(agenda_number).getRdv());}
+                            status = menu_rdv(agendas.get(agenda_number).getRdv(),scan);}
                         choix = 0;
                         break;
                     
@@ -102,8 +102,7 @@ public class Calendar {
         }
     }
     
-    public static int menu_rdv(List<RendezVous> rdv){
-        Scanner scan = new Scanner(System.in);
+    public static int menu_rdv(List<RendezVous> rdv, Scanner scan){
         int status = -1;
         int choix_rdv = 0;        
         while(status == -1){
@@ -117,7 +116,12 @@ public class Calendar {
                     RendezVous new_rdv;
                     
                     System.out.println("Entrez la date :");
-                    date = scan.next();
+                    date = scan.next();     
+                    while(RendezVous.CheckDate(date) != true){
+                        System.out.println("Entrez invalide");
+                        date=scan.next();
+                    }
+
                     System.out.println("Entrez l'heure de début");
                     h_start = scan.next();
                     System.out.println("Entrez l'heure de fin");
@@ -136,10 +140,11 @@ public class Calendar {
                         System.out.println(rdv.get(i).toString());
                     }
                     rdv_to_edit =  scan.nextInt();
+                    rdv_to_edit +=1;
                     if(rdv_to_edit < rdv.size() && rdv_to_edit >0){
                         System.out.print("changement sur : ");
-                        System.out.println(rdv.get(rdv_to_edit +1));
-                        edit_rdv(rdv.get(rdv_to_edit +1));
+                        System.out.println(rdv.get(rdv_to_edit));
+                        edit_rdv(rdv.get(rdv_to_edit),scan);
                     }
                     break;
                     
@@ -156,8 +161,22 @@ public class Calendar {
         return status;
     }
     
-    public static void edit_rdv(RendezVous rdv){
+    public static void edit_rdv(RendezVous rdv, Scanner scan){
     //menu to choose what to changes
+        int choice;
+        String new_date;
+        System.out.println("Que changez ?");
+        System.out.println("1- Date \n2- Heure de début\n3- Heure de fin\n4- label\n5- reminder");
+        choice = scan.nextInt();
+        switch(choice){
+            case 1:
+                System.out.println("Nouvelle date :");
+                new_date = scan.next();
+                rdv.setDate(new_date);
+
+        }
+
+        
     
     
     }
