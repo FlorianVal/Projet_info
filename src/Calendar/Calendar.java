@@ -80,14 +80,13 @@ public class Calendar {
                                 //list rdvs of agenda
                                 get_print_rdvs(agendas.get(i));
                                 agenda_number = i;
+                                
                                 setAgenda = agendas.get(i);
                                 break; 
                         }}
                         //temporary then go in rdv menu
                         if (agenda_number != -1){
                             status = menu_rdv(agendas.get(agenda_number).getRdv());}
-                        System.out.println(choix);
-                        System.out.println(status);
                         choix = 0;
                         break;
                     
@@ -127,6 +126,23 @@ public class Calendar {
                     rdv.add(new_rdv);
                     break;
                
+
+                case 2: 
+                    int rdv_to_edit;
+                    System.out.println("Quel rdv voulez vous changer ?");
+                    for (int i =0; i < rdv.size(); i++){
+                        System.out.print(i + 1);
+                        System.out.print(" - ");
+                        System.out.println(rdv.get(i).toString());
+                    }
+                    rdv_to_edit =  scan.nextInt();
+                    if(rdv_to_edit < rdv.size() && rdv_to_edit >0){
+                        System.out.print("changement sur : ");
+                        System.out.println(rdv.get(rdv_to_edit +1));
+                        edit_rdv(rdv.get(rdv_to_edit +1));
+                    }
+                    break;
+                    
                 case 3:
                     System.out.println("Acctualisation de la liste de RDV ...\n");
                     get_print_rdvs(setAgenda);                
@@ -138,6 +154,13 @@ public class Calendar {
         }
         return status;
     }
+    
+    public static void edit_rdv(RendezVous rdv){
+    //menu to choose what to changes
+    
+    
+    }
+    
     public static List<RendezVous> get_print_rdvs(Agenda agenda){
         List<RendezVous> rdv_agenda;
         rdv_agenda = agenda.getRdv();
