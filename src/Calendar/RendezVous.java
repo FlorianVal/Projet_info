@@ -26,7 +26,26 @@ public class RendezVous implements Serializable {
             this.h_start = h_start;
             this.h_end = h_end;
         }
-        System.out.println("Problème date");
+        else{
+        System.out.println("Problème date");}
+    }
+    
+    public static long date_to_timestamp(String date,String time) {
+        try{
+            int day = Integer.parseInt(date.split("/")[0]);
+            int month = Integer.parseInt(date.split("/")[1]) - 1;
+            int year = Integer.parseInt(date.split("/")[2]) - 1900;
+            int hour = Integer.parseInt(time.split(":")[0]);
+            int minutes = Integer.parseInt(time.split(":")[1]);
+            Date timestamp = new Date(year, month, day, hour, minutes);
+            System.out.println(timestamp);
+            return timestamp.getTime();
+
+        }
+        catch(java.lang.NumberFormatException e){
+                System.out.println("Invalid input");
+                return 0;
+                }
     }
     
     static public boolean CheckDate(String date){

@@ -44,6 +44,8 @@ public class Agenda implements Serializable{
     }
     
     public static void save_agenda(List<Agenda> agend) throws IOException {
+        File file = new File("agendas_save.txt");
+        file.delete();
         FileOutputStream fout=new FileOutputStream("agendas_save.txt");  
         ObjectOutputStream out=new ObjectOutputStream(fout);  
         out.writeObject(agend);
