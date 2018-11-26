@@ -5,8 +5,11 @@
  */
 package Calendar;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author florianvalade
@@ -17,34 +20,36 @@ public class Calendar {
      * @param args the command line arguments
      */
    static Agenda setAgenda;
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         //rdv init
         
-        RendezVous rdv1 = new RendezVous("17/12/2018","17:00","17:30");
-        RendezVous rdv2 = new RendezVous("17/12/2018","17:00","17:30");
+        //RendezVous rdv1 = new RendezVous("17/12/2018","17:00","17:30");
+        //RendezVous rdv2 = new RendezVous("17/12/2018","17:00","17:30");
         //TODO find agenda on disk
         // list rdv init
-        List<RendezVous> rdvs = new ArrayList<>();
-        rdvs.add(rdv1);
-        rdvs.add(rdv2);    
-        rdvs.get(0).setLabel("Le deuxième :)");
+        //List<RendezVous> rdvs = new ArrayList<>();
+        //rdvs.add(rdv1);
+        //rdvs.add(rdv2);    
+        //rdvs.get(0).setLabel("Le deuxième :)");
 
         //init agenda list
         List<Agenda> agendas = new ArrayList<>();
-        agendas.add(new Agenda("Florian",rdvs));
+        agendas = Agenda.get_save();
+        //agendas.add(new Agenda("Florian",rdvs));
         //menu
         menu_agenda(agendas);
         
     }
-    public static void menu_agenda(List<Agenda> agendas){      
+    public static void menu_agenda(List<Agenda> agendas) throws IOException{      
         Scanner scan = new Scanner(System.in);
         int choix = 0;
         int status = 0;
         while (choix == 0){
             if (status != 0){
                 // exiting loop if menu_rdv ask it
-                System.out.println("exiting by status");
-                choix = -1;
+                System.out.println("exiting agenda");
+                choix = 0;
+                status = 0;
                 continue;
             }
             System.out.println("Menu :\n 1-Créer un Agenda\n 2- Ouvrir un Agenda\n 3- quitter");
@@ -92,6 +97,7 @@ public class Calendar {
                     
                     case 3:
                         System.out.print("exiting\n");
+                        Agenda.save_agenda(agendas);
                         break;
                     default:
                         choix = 0;

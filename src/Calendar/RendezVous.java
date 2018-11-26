@@ -4,12 +4,14 @@
  * and open the template in the editor.
  */
 package Calendar;
+import java.io.Serializable;
 import java.util.Date;
 /**
  *
  * @author florianvalade
  */
-public class RendezVous {
+
+public class RendezVous implements Serializable {
     private String date;
     private String h_start;
     private String h_end;
