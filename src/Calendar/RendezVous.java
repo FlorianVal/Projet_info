@@ -4,8 +4,13 @@
  * and open the template in the editor.
  */
 package Calendar;
-import java.io.Serializable;
 import java.util.Date;
+import java.io.Serializable;
+import java.util.List;
+import java.lang.*;
+import java.util.Collections;
+import java.util.Comparator;
+
 /**
  *
  * @author florianvalade
@@ -17,6 +22,7 @@ public class RendezVous implements Serializable {
     private String h_end;
     private String label;
     private boolean reminder;
+    private long TimeSTAMP; 
     
     public RendezVous(String date, String h_start, String h_end) {
         // check if date is valid
@@ -25,18 +31,21 @@ public class RendezVous implements Serializable {
             this.date = date;
             this.h_start = h_start;
             this.h_end = h_end;
+            this.TimeSTAMP = RendezVous.date_to_timestamp(date, h_start); 
         }
         else{
         System.out.println("Problème date");}
     }
     
-    public static long date_to_timestamp(String date,String time) {
+        
+    public static long date_to_timestamp(String date, String h_start) {
         try{
+                      
             int day = Integer.parseInt(date.split("/")[0]);
             int month = Integer.parseInt(date.split("/")[1]) - 1;
             int year = Integer.parseInt(date.split("/")[2]) - 1900;
-            int hour = Integer.parseInt(time.split(":")[0]);
-            int minutes = Integer.parseInt(time.split(":")[1]);
+            int hour = Integer.parseInt(h_start.split(":")[0]);
+            int minutes = Integer.parseInt(h_start.split(":")[1]);
             Date timestamp = new Date(year, month, day, hour, minutes);
             System.out.println(timestamp);
             return timestamp.getTime();
@@ -116,6 +125,12 @@ public class RendezVous implements Serializable {
         return label;
     }
 
+    public long getTimeSTAMP() {
+        return TimeSTAMP;
+    }
+   
+   
+
     public void setLabel(String label) {
         this.label = label;
     }
@@ -124,6 +139,8 @@ public class RendezVous implements Serializable {
     public String toString() {
         return "date=" + date + ", h_start=" + h_start + ", h_end=" + h_end + ", label=" + label + ", reminder=" + reminder ;
     }
+
+    
     
     
 

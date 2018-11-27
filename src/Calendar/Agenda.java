@@ -8,6 +8,8 @@ import java.io.Serializable;
 import java.util.List;
 import java.io.*;  
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -70,6 +72,28 @@ public class Agenda implements Serializable{
         return agendas;
 
     }
+
+class SortByTime implements Comparator<RendezVous> {            
+        public int compare(RendezVous a, RendezVous b)
+    { 
+        return (int)(a.getTimeSTAMP() - b.getTimeSTAMP()); 
+       
+    }
+    }
+    
+        public void Trie (List<RendezVous> RDV){
+            Collections.sort(RDV, new SortByTime());
+        
+            System.out.println( "\nSorted by date");
+            for ( int i=0; i<RDV.size(); i++)
+            {
+                int n = RDV.size();
+                System.out.println(RDV.get(n-i-1));
+            }
+                
+        } 
+        
+    
     
     
 }

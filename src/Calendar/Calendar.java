@@ -35,19 +35,9 @@ public class Calendar {
 
         //init agenda list
         List<Agenda> agendas = new ArrayList<>();
+        //agendas.add(new Agenda("Florian", rdvs));
         agendas = Agenda.get_save();
-        //agendas.add(new Agenda("Florian",rdvs));
-        //menu
-        JFrame fenetre = new JFrame();
-        //Définit un titre pour notre fenêtre
-        fenetre.setTitle("Ma première fenêtre Java");
-        //Définit sa taille : 400 pixels de large et 100 pixels de haut
-        fenetre.setSize(400, 100);
-        //Nous demandons maintenant à notre objet de se positionner au centre
-        fenetre.setLocationRelativeTo(null);
-        //Termine le processus lorsqu'on clique sur la croix rouge
-        fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        fenetre.setVisible(true);
+
         menu_agenda(agendas);
         
     }
@@ -123,7 +113,7 @@ public class Calendar {
         int status = -1;
         int choix_rdv = 0;        
         while(status == -1){
-            System.out.println("Menu :\n 1-Créer un rdv\n 2- editer un rdv\n 3- Supprimer un RDV \n 4-  Actualiser la liste de rendez-vous\n 5- quitter");
+            System.out.println("Menu :\n 1-Créer un rdv\n 2- editer un rdv\n 3- Supprimer un RDV \n 4-  Actualiser la liste de rendez-vous\n 5- Trie de la liste de RDV \n 6- quitter");
             choix_rdv = scan.nextInt();
             switch(choix_rdv){
                 case 1: /* Créeation d'un nouveau rendez vous */ 
@@ -185,11 +175,15 @@ public class Calendar {
                     break; 
                     
                 case 4: /* Acctualisation d'un rendez vous */ 
-                    System.out.println("Acctualisation de la liste de RDV ...\n");
-                    get_print_rdvs(setAgenda); 
+                    get_print_rdvs(setAgenda);
                     break; 
                     
-                case 5: 
+                case 5: /* Trie de la liste de rendez vous */
+                    System.out.println("Acctualisation de la liste de RDV ...\n");
+                    setAgenda.Trie(rdv);
+                    break; 
+                    
+                case 6: 
                     status = 1;
                     break;
             }
