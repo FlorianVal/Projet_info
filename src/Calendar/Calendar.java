@@ -8,6 +8,7 @@ package Calendar;
 import java.io.IOException;
 import java.util.*;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,34 +25,23 @@ public class Calendar {
     public static void main(String[] args) throws IOException {
         //rdv init
         
-        //RendezVous rdv1 = new RendezVous("17/12/2018","17:00","17:30");
-        //RendezVous rdv2 = new RendezVous("17/12/2018","17:00","17:30");
+        RendezVous rdv1 = new RendezVous("17/12/2018","17:00","17:30");
+        RendezVous rdv2 = new RendezVous("17/12/2018","17:00","17:30");
         //TODO find agenda on disk
         // list rdv init
-        //List<RendezVous> rdvs = new ArrayList<>();
-        //rdvs.add(rdv1);
-        //rdvs.add(rdv2);    
-        //rdvs.get(0).setLabel("Le deuxième :)");
+        ArrayList<RendezVous> rdvs = new ArrayList<>();
+        rdvs.add(rdv1);
+        rdvs.add(rdv2);    
+        rdvs.get(0).setLabel("Le deuxième :)");
 
         //init agenda list
-        List<Agenda> agendas = new ArrayList<>();
-        agendas = Agenda.get_save();
-        //agendas.add(new Agenda("Florian",rdvs));
-        //menu
-        JFrame fenetre = new JFrame();
-        //Définit un titre pour notre fenêtre
-        fenetre.setTitle("Ma première fenêtre Java");
-        //Définit sa taille : 400 pixels de large et 100 pixels de haut
-        fenetre.setSize(400, 100);
-        //Nous demandons maintenant à notre objet de se positionner au centre
-        fenetre.setLocationRelativeTo(null);
-        //Termine le processus lorsqu'on clique sur la croix rouge
-        fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        fenetre.setVisible(true);
+        ArrayList<Agenda> agendas = new ArrayList<>();
+        //agendas = Agenda.get_save();
+        agendas.add(new Agenda("Florian",rdvs));
         menu_agenda(agendas);
         
     }
-    public static void menu_agenda(List<Agenda> agendas) throws IOException{      
+    public static void menu_agenda(ArrayList<Agenda> agendas) throws IOException{      
         Scanner scan = new Scanner(System.in);
         int choix = 0;
         int status = 0;
@@ -65,12 +55,13 @@ public class Calendar {
             }
             System.out.println("Menu :\n 1-Créer un Agenda\n 2- Ouvrir un Agenda\n 3- quitter");
             choix = scan.nextInt();
+            ArrayList<RendezVous> rdvs = new ArrayList<>();
+
             switch(choix){
                     case 1:
                         //add new agenda in agenda list
                         System.out.println("Rentrez votre nom :");
                         String name = scan.next();  
-                        
                         //create new agenda with name of user
                         Agenda new_agenda; 
                         new_agenda = new Agenda(name);
@@ -90,7 +81,7 @@ public class Calendar {
                         String name_agenda = scan.next();
                         //search in agenda list the right one
                         for (int i =0; i<agendas.size(); i++){
-                            //if the name of agenda is the right one
+                            // if the name of agenda is the right one
                             if(agendas.get(i).getUsername().equals(name_agenda)){
                                 System.out.println("agenda found with rdvs :");
                                 //list rdvs of agenda
@@ -99,12 +90,15 @@ public class Calendar {
                                 
                                 setAgenda = agendas.get(i);
                                 break; 
-                        }}
+                        }
+                        }   
                         //temporary then go in rdv menu
                         if (agenda_number != -1){
-                            status = menu_rdv(agendas.get(agenda_number).getRdv(),scan);}
+                        rdvs = Affichage.Menu_agenda(agendas);
+                        status = menu_rdv(rdvs ,scan);//}
                         choix = 0;
                         break;
+                        }
                     
                     case 3:
                         System.out.print("exiting\n");
@@ -119,7 +113,7 @@ public class Calendar {
         }
     }
     
-    public static int menu_rdv(List<RendezVous> rdv, Scanner scan){
+    public static int menu_rdv(ArrayList<RendezVous> rdv, Scanner scan){
         int status = -1;
         int choix_rdv = 0;        
         while(status == -1){
@@ -237,8 +231,8 @@ public class Calendar {
     
     }
     
-    public static List<RendezVous> get_print_rdvs(Agenda agenda){
-        List<RendezVous> rdv_agenda;
+    public static ArrayList<RendezVous> get_print_rdvs(Agenda agenda){
+        ArrayList<RendezVous> rdv_agenda;
         rdv_agenda = agenda.getRdv();
         
         // if rdvs exist print them and return them

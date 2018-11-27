@@ -18,14 +18,14 @@ import java.util.logging.Logger;
 
 public class Agenda implements Serializable{
     private String username;
-    private List<RendezVous> rdv;
+    private ArrayList<RendezVous> rdv;
 
     public Agenda(String username) {
         this.username = username;
         this.rdv = new ArrayList<>();
     }
 
-    public Agenda(String username, List<RendezVous> rdv) {
+    public Agenda(String username, ArrayList<RendezVous> rdv) {
         this.username = username;
         this.rdv = rdv;
     }
@@ -39,7 +39,7 @@ public class Agenda implements Serializable{
         return username;
     }
 
-    public List<RendezVous> getRdv() {
+    public ArrayList<RendezVous> getRdv() {
         return rdv;
     }
     
@@ -53,11 +53,11 @@ public class Agenda implements Serializable{
         System.out.println("success");  
     }
     
-    public static List<Agenda> get_save() throws IOException {
+    public static ArrayList<Agenda> get_save() throws IOException {
         ObjectInputStream in=new ObjectInputStream(new FileInputStream("agendas_save.txt"));  
-        List<Agenda> agendas;  
+        ArrayList<Agenda> agendas;  
         try {
-            agendas = (List<Agenda>)in.readObject();
+            agendas = (ArrayList<Agenda>)in.readObject();
             System.out.println(agendas); 
         } catch (ClassNotFoundException ex) {
             
