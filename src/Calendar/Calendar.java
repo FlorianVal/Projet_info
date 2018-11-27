@@ -35,16 +35,10 @@ public class Calendar {
         rdvs.get(0).setLabel("Le deuxième :)");
 
         //init agenda list
-<<<<<<< HEAD
         ArrayList<Agenda> agendas = new ArrayList<>();
         //agendas = Agenda.get_save();
         agendas.add(new Agenda("Florian",rdvs));
-=======
-        List<Agenda> agendas = new ArrayList<>();
-        //agendas.add(new Agenda("Florian", rdvs));
-        agendas = Agenda.get_save();
 
->>>>>>> 7ddb51d188791c1f68d6bf40f6dc189ff9111dab
         menu_agenda(agendas);
         
     }
@@ -92,7 +86,7 @@ public class Calendar {
                             if(agendas.get(i).getUsername().equals(name_agenda)){
                                 System.out.println("agenda found with rdvs :");
                                 //list rdvs of agenda
-                                get_print_rdvs(agendas.get(i));
+                                rdvs = get_print_rdvs(agendas.get(i));
                                 agenda_number = i;
                                 
                                 setAgenda = agendas.get(i);
@@ -101,7 +95,7 @@ public class Calendar {
                         }   
                         //temporary then go in rdv menu
                         if (agenda_number != -1){
-                        rdvs = Affichage.Menu_agenda(agendas);
+                        //rdvs = Affichage.Menu_agenda(agendas);
                         status = menu_rdv(rdvs ,scan);//}
                         choix = 0;
                         break;
