@@ -1,6 +1,5 @@
 *.DS_Store
 *.xml
 *.mf
-nbproject/
 dist/
 *.class
