@@ -35,9 +35,16 @@ public class Calendar {
         rdvs.get(0).setLabel("Le deuxième :)");
 
         //init agenda list
+<<<<<<< HEAD
         ArrayList<Agenda> agendas = new ArrayList<>();
         //agendas = Agenda.get_save();
         agendas.add(new Agenda("Florian",rdvs));
+=======
+        List<Agenda> agendas = new ArrayList<>();
+        //agendas.add(new Agenda("Florian", rdvs));
+        agendas = Agenda.get_save();
+
+>>>>>>> 7ddb51d188791c1f68d6bf40f6dc189ff9111dab
         menu_agenda(agendas);
         
     }
@@ -117,7 +124,7 @@ public class Calendar {
         int status = -1;
         int choix_rdv = 0;        
         while(status == -1){
-            System.out.println("Menu :\n 1-Créer un rdv\n 2- editer un rdv\n 3- Supprimer un RDV \n 4-  Actualiser la liste de rendez-vous\n 5- quitter");
+            System.out.println("Menu :\n 1-Créer un rdv\n 2- editer un rdv\n 3- Supprimer un RDV \n 4-  Actualiser la liste de rendez-vous\n 5- Trie de la liste de RDV \n 6- quitter");
             choix_rdv = scan.nextInt();
             switch(choix_rdv){
                 case 1: /* Créeation d'un nouveau rendez vous */ 
@@ -179,11 +186,15 @@ public class Calendar {
                     break; 
                     
                 case 4: /* Acctualisation d'un rendez vous */ 
-                    System.out.println("Acctualisation de la liste de RDV ...\n");
-                    get_print_rdvs(setAgenda); 
+                    get_print_rdvs(setAgenda);
                     break; 
                     
-                case 5: 
+                case 5: /* Trie de la liste de rendez vous */
+                    System.out.println("Acctualisation de la liste de RDV ...\n");
+                    setAgenda.Trie(rdv);
+                    break; 
+                    
+                case 6: 
                     status = 1;
                     break;
             }
