@@ -7,6 +7,7 @@ package Calendar;
 
 import java.io.IOException;
 import java.util.*;
+import javax.swing.JFrame;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,6 +38,16 @@ public class Calendar {
         agendas = Agenda.get_save();
         //agendas.add(new Agenda("Florian",rdvs));
         //menu
+        JFrame fenetre = new JFrame();
+        //Définit un titre pour notre fenêtre
+        fenetre.setTitle("Ma première fenêtre Java");
+        //Définit sa taille : 400 pixels de large et 100 pixels de haut
+        fenetre.setSize(400, 100);
+        //Nous demandons maintenant à notre objet de se positionner au centre
+        fenetre.setLocationRelativeTo(null);
+        //Termine le processus lorsqu'on clique sur la croix rouge
+        fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        fenetre.setVisible(true);
         menu_agenda(agendas);
         
     }
