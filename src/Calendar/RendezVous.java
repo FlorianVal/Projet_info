@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.lang.*;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -53,6 +54,18 @@ public class RendezVous implements Serializable {
 
     public long getTimeSTAMP() {
         return TimeSTAMP;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public LocalTime getH_start() {
+        return h_start;
+    }
+
+    public LocalTime getH_end() {
+        return h_end;
     }
 
     public void setDate(LocalDate date) {
@@ -99,6 +112,20 @@ public class RendezVous implements Serializable {
                 System.out.println("Invalid input");
                 return 0;
                 }
+    }
+    //check if there is another rdv on the same hour
+    public boolean check_avaibility(ArrayList<RendezVous> rdvs){
+        for(int i = 0; i< rdvs.size(); i++){
+            // check if one rdv in the list has the same date
+            if(this.date == rdvs.get(i).getDate()){
+                if((this.h_start.isBefore(rdvs.get(i).getH_end()) && this.h_start.isAfter(rdvs.get(i).getH_start()))  )
+                {
+                    return false;
+                }
+            }
+                
+        }
+        return true;
     }
     
     static public boolean CheckDate(LocalDate date){
