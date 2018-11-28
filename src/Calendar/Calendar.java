@@ -7,6 +7,8 @@ package Calendar;
 
 import static Calendar.Sortbydate.TrieRDV;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.*;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -26,9 +28,9 @@ public class Calendar {
     public static void main(String[] args) throws IOException {
         //rdv init
         
-        RendezVous rdv1 = new RendezVous("15/12/2018","17:00","17:30");
-        RendezVous rdv2 = new RendezVous("17/12/2018","17:00","17:30");
-        RendezVous rdv3 = new RendezVous("16/12/2018","17:00","17:30");
+        RendezVous rdv1 = new RendezVous("2018-12-18","17:00","17:30");
+        RendezVous rdv2 = new RendezVous("2018-12-17","17:00","17:30");
+        RendezVous rdv3 = new RendezVous("2018-12-16","17:00","17:30");
         
         //TODO find agenda on disk
         // list rdv init
@@ -135,10 +137,8 @@ public class Calendar {
                     
                     System.out.println("Entrez la date :");
                     date = scan.next();     
-                    while(RendezVous.CheckDate(date) != true){
-                        System.out.println("Entrez invalide");
-                        date=scan.next();
-                    }
+                    System.out.println("Entrez invalide");
+                    date=scan.next();
 
                     System.out.println("Entrez l'heure de début");
                     h_start = scan.next();
@@ -208,6 +208,7 @@ public class Calendar {
     //menu to choose what to changes
         int choice;
         String new_date;
+        LocalTime new_localtime;
         System.out.println("Que changez ?");
         System.out.println("1- Date \n2- Heure de début\n3- Heure de fin\n4- label");
         choice = scan.nextInt();
@@ -215,19 +216,20 @@ public class Calendar {
             case 1:
                 System.out.println("Nouvelle date :");
                 new_date = scan.next();
-                while(rdv.setDate(new_date)== false){
-                    new_date = scan.next();
-                };
+                LocalDate new_localdate = LocalDate.parse(new_date);
+                rdv.setDate(new_localdate);
                 break;
             case 2:
                 System.out.println("Nouvelle Heure de début :");
                 new_date = scan.next();
-                rdv.setH_start(new_date);
+                new_localtime = LocalTime.parse(new_date);
+                rdv.setH_start(new_localtime);
                 break;
             case 3:
                 System.out.println("Nouvelle Heure de fin :");
                 new_date = scan.next();
-                rdv.setH_end(new_date);
+                new_localtime = LocalTime.parse(new_date);
+                rdv.setH_end(new_localtime);
                 break;
             case 4:
                 System.out.println("Nouveau label :");
