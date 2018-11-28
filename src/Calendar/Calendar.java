@@ -5,6 +5,7 @@
  */
 package Calendar;
 
+import static Calendar.Sortbydate.TrieRDV;
 import java.io.IOException;
 import java.util.*;
 import javax.swing.JFrame;
@@ -25,14 +26,19 @@ public class Calendar {
     public static void main(String[] args) throws IOException {
         //rdv init
         
-        RendezVous rdv1 = new RendezVous("17/12/2018","17:00","17:30");
+        RendezVous rdv1 = new RendezVous("15/12/2018","17:00","17:30");
         RendezVous rdv2 = new RendezVous("17/12/2018","17:00","17:30");
+        RendezVous rdv3 = new RendezVous("16/12/2018","17:00","17:30");
+        
         //TODO find agenda on disk
         // list rdv init
         ArrayList<RendezVous> rdvs = new ArrayList<>();
         rdvs.add(rdv1);
         rdvs.add(rdv2);    
+        rdvs.add(rdv3);
         rdvs.get(0).setLabel("Le deuxième :)");
+        
+        
 
         //init agenda list
         ArrayList<Agenda> agendas = new ArrayList<>();
@@ -184,8 +190,10 @@ public class Calendar {
                     break; 
                     
                 case 5: /* Trie de la liste de rendez vous */
-                    System.out.println("Acctualisation de la liste de RDV ...\n");
-                    setAgenda.Trie(rdv);
+                    System.out.println("Trie de la liste de RDV ...\n");
+                    
+                    TrieRDV(rdv);                   
+                
                     break; 
                     
                 case 6: 
