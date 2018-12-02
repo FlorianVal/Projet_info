@@ -45,19 +45,19 @@ public class Agenda implements Serializable{
         return rdv;
     }
     
-    public static void save_agenda(List<Agenda> agend) throws IOException {
+    public static void save_agenda(ArrayList<Agenda> agend) throws IOException {
         File file = new File("agendas_save.txt");
         file.delete();
         FileOutputStream fout=new FileOutputStream("agendas_save.txt");  
         ObjectOutputStream out=new ObjectOutputStream(fout);  
         out.writeObject(agend);
         out.flush();  
-        System.out.println("success");  
+        System.out.println("success");
     }
     
     public static ArrayList<Agenda> get_save() throws IOException {
         ObjectInputStream in=new ObjectInputStream(new FileInputStream("agendas_save.txt"));  
-        ArrayList<Agenda> agendas;  
+        ArrayList<Agenda> agendas;
         try {
             agendas = (ArrayList<Agenda>)in.readObject();
             System.out.println(agendas); 

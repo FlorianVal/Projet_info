@@ -34,7 +34,6 @@ public class RendezVous implements Serializable {
         this.label = null;
         this.reminder = false;
         this.TimeSTAMP = RendezVous.date_to_timestamp(this.date, this.h_start); 
-        System.out.print("rdv created !\n");
 
     }
  
@@ -47,6 +46,7 @@ public class RendezVous implements Serializable {
         this(date, h_start, h_end, reminder);
         this.label = label;
     }
+    
 
     public String getLabel() {
         return label;
@@ -117,9 +117,14 @@ public class RendezVous implements Serializable {
     public boolean check_avaibility(ArrayList<RendezVous> rdvs){
         for(int i = 0; i< rdvs.size(); i++){
             // check if one rdv in the list has the same date
-            if(this.date == rdvs.get(i).getDate()){
-                if((this.h_start.isBefore(rdvs.get(i).getH_end()) && this.h_start.isAfter(rdvs.get(i).getH_start()))  )
+            if(this.date.equals(rdvs.get(i).getDate())){
+                if((this.h_start.isBefore(rdvs.get(i).getH_end()) && this.h_start.isAfter(rdvs.get(i).getH_start())) ||
+                (this.h_end.isBefore(rdvs.get(i).getH_end()) && this.h_end.isAfter(rdvs.get(i).getH_start())) ||
+                 this.h_start.equals(rdvs.get(i).getH_start()) || this.h_end.equals(rdvs.get(i).getH_end()))
                 {
+                    System.out.println("conflicts on rdv :");
+                    System.out.println(rdvs.get(i).toString());
+                    System.out.println(this.toString());
                     return false;
                 }
             }
@@ -128,6 +133,12 @@ public class RendezVous implements Serializable {
         return true;
     }
     
+    static public ArrayList<RendezVous> get_rdvs_with_criteria(ArrayList<RendezVous> rdvs, String criteria){
+        ArrayList<RendezVous> rdvs_filtered;
+        for(int i =0; i<rdvs.size(); i++){
+        }
+        return rdvs;
+    }
     static public boolean CheckDate(LocalDate date){
         if (date.isBefore(LocalDate.now())){
                 System.out.print("Date given is before today's date\n");

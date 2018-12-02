@@ -32,10 +32,10 @@ public class Affichage extends JFrame{
         this.setSize(width,height);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);             
-        pan.setBackground(Color.ORANGE); 
-        pan.add(bouton_add);
-        pan.add(bouton_edit);
-        pan.add(bouton_delete);
+        this.pan.setBackground(Color.ORANGE); 
+        this.pan.add(bouton_add);
+        this.pan.add(bouton_edit);
+        this.pan.add(bouton_delete);
         this.setContentPane(pan);
         this.setVisible(true);
 
@@ -66,7 +66,8 @@ public class Affichage extends JFrame{
         return null;
     }
     
-    public static void Traiter_Agenda(Agenda agenda){
+    public void Traiter_Agenda(Agenda agenda){
+        this.pan.setBackground(Color.red);
         //creer fenetre avec boutton et liste des rdvs
     }
 }

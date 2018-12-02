@@ -29,15 +29,15 @@ public class Calendar {
         //rdv init
         
         RendezVous rdv1 = new RendezVous("2018-12-18","17:00","17:30");
-        RendezVous rdv2 = new RendezVous("2018-12-17","17:00","17:30");
-        RendezVous rdv3 = new RendezVous("2018-12-16","17:00","17:30");
+        //RendezVous rdv2 = new RendezVous("2018-12-17","17:00","17:30");
+        //RendezVous rdv3 = new RendezVous("2018-12-16","17:00","17:30");
         
         //TODO find agenda on disk
         // list rdv init
         ArrayList<RendezVous> rdvs = new ArrayList<>();
         rdvs.add(rdv1);
-        rdvs.add(rdv2);    
-        rdvs.add(rdv3);
+        //rdvs.add(rdv2);    
+        //rdvs.add(rdv3);
         rdvs.get(0).setLabel("Le deuxième :)");
         
         
@@ -47,8 +47,11 @@ public class Calendar {
         //agendas = Agenda.get_save();
         agendas.add(new Agenda("Florian",rdvs));
 
-        menu_agenda(agendas);
-        
+        //menu_agenda(agendas);
+        Agenda agend;
+        Affichage window = new Affichage() ;
+        agend = Affichage.Menu_select_agenda(agendas);
+        window.Traiter_Agenda(agend);
     }
     public static void menu_agenda(ArrayList<Agenda> agendas) throws IOException{      
         Scanner scan = new Scanner(System.in);
@@ -137,15 +140,17 @@ public class Calendar {
                     
                     System.out.println("Entrez la date :");
                     date = scan.next();     
-                    System.out.println("Entrez invalide");
-                    date=scan.next();
-
                     System.out.println("Entrez l'heure de début");
                     h_start = scan.next();
                     System.out.println("Entrez l'heure de fin");
                     h_end = scan.next();
                     new_rdv = new RendezVous(date,h_start,h_end);
-                    rdv.add(new_rdv);
+                    //check if there is another rdv on same time
+                    if(!new_rdv.check_avaibility(rdv)){
+                        System.out.println("Un rendez vous est sur ce créneau !");
+                    }else{ 
+                        rdv.add(new_rdv);
+                    }
                     break;
                
 
