@@ -48,11 +48,11 @@ public class Calendar {
         //agendas = Agenda.get_save();
         agendas.add(new Agenda("Florian",rdvs));
 
-        //menu_agenda(agendas);
+        menu_agenda(agendas);
         Agenda agend;
-        Affichage window = new Affichage() ;
-        agend = Affichage.Menu_select_agenda(agendas);
-        window.Traiter_Agenda(agend);
+        //Affichage window = new Affichage() ;
+        //agend = Affichage.Menu_select_agenda(agendas);
+        //window.Traiter_Agenda(agend);
     }
     public static void menu_agenda(ArrayList<Agenda> agendas) throws IOException{      
         Scanner scan = new Scanner(System.in);
