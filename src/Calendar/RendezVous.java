@@ -70,10 +70,14 @@ public class RendezVous implements Serializable {
 
     public void setDate(LocalDate date) {
         this.date = date;
+        this.TimeSTAMP = RendezVous.date_to_timestamp(this.date, this.h_start); 
+
     }
 
     public void setH_start(LocalTime h_start) {
         this.h_start = h_start;
+        this.TimeSTAMP = RendezVous.date_to_timestamp(this.date, this.h_start); 
+
     }
 
     public void setH_end(LocalTime h_end) {

@@ -5,9 +5,12 @@
  */
 package Calendar;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  *
@@ -30,6 +33,25 @@ class Sortbydate implements Comparator<RendezVous> {
             {
                 System.out.println(rdv.get(i));
             }
+          
+        }
+        
+        public static void btween2d ( List<RendezVous> rdv ) {
+            System.out.println("Choisir une date, pour afficher votre liste de rdv entre aujourdhui et cette date");
+            Scanner scan = new Scanner(System.in);
+            String date_limit = scan.next();
+            LocalDate limit_localdate = LocalDate.parse(date_limit);
+            String h_limit;
+            h_limit = "23:59";
+            long limit_TimeSTAMP = RendezVous.date_to_timestamp(limit_localdate , LocalTime.parse(h_limit)); 
+            
+                for (int i =0; i < rdv.size(); i++)
+                {
+                        if (rdv.get(i).getTimeSTAMP() < limit_TimeSTAMP )
+                        {
+                             System.out.println(rdv.get(i).toString());
+                        }
+                }         
         }
     }
     
