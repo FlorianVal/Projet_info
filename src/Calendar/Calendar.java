@@ -6,6 +6,7 @@
 package Calendar;
 
 import static Calendar.Sortbydate.TrieRDV;
+import static Calendar.Sortbydate.btween2d;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -129,7 +130,7 @@ public class Calendar {
         int status = -1;
         int choix_rdv = 0;        
         while(status == -1){
-            System.out.println("Menu :\n 1-Créer un rdv\n 2- editer un rdv\n 3- Supprimer un RDV \n 4-  Actualiser la liste de rendez-vous\n 5- Trie de la liste de RDV \n 6- quitter");
+            System.out.println("Menu :\n 1-Créer un rdv\n 2- editer un rdv\n 3- Supprimer un RDV \n 4-  Actualiser la liste de rendez-vous\n 5- Trier  la liste de RDV par date\n 6- Afficher les rdv jusqu'a la date de votre choix  \n 7- quitter");
             choix_rdv = scan.nextInt();
             switch(choix_rdv){
                 case 1: /* Créeation d'un nouveau rendez vous */ 
@@ -192,16 +193,19 @@ public class Calendar {
                     
                 case 4: /* Acctualisation d'un rendez vous */ 
                     get_print_rdvs(setAgenda);
+               
                     break; 
                     
-                case 5: /* Trie de la liste de rendez vous */
-                    System.out.println("Trie de la liste de RDV ...\n");
-                    
+                case 5: /* Trie de la liste de rendez vous par date*/
+                    System.out.println("Trie de la liste de RDV par date ...\n");
                     TrieRDV(rdv);                   
                 
                     break; 
                     
-                case 6: 
+                case 6 : /* RDv entre 2 date */ 
+                    btween2d(rdv); 
+        
+                case 7: 
                     status = 1;
                     break;
             }
