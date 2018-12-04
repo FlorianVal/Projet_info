@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -97,9 +98,20 @@ public class Affichage extends JFrame implements ActionListener, ListSelectionLi
         //creer fenetre avec boutton et liste des rdvs
     }
     
-    public RendezVous Popup_add_rdv(){
-        RendezVous rdv = new RendezVous("2018-12-18","17:00","17:30");
+    public void Popup_rdv(){
+        this.agenda.add_rdv(this.Popup_rdv(null,null,null));
+    }
+    
+    public RendezVous Popup_rdv(String date, String Hstart, String Hend){
         //do popup to create rdv
+        JOptionPane jop = new JOptionPane();        
+        String new_date = (String)jop.showInputDialog(this.pan,
+                        "Date:", date);
+        String new_Hstart = (String)jop.showInputDialog(this.pan,
+                        "Heure de début:", Hstart);
+        String new_Hend = (String)jop.showInputDialog(this.pan,
+                        "Heure de fin:", Hend);
+        RendezVous rdv = new RendezVous(new_date,new_Hstart,new_Hend);
         return rdv;
     }
     
@@ -108,19 +120,29 @@ public class Affichage extends JFrame implements ActionListener, ListSelectionLi
         this.agenda.remove_rdv(index);
         this.Traiter_Agenda(this.agenda);
     }
+    public void edit_rdv(){
+        int index = this.list.getSelectedIndex();
+        RendezVous rdv = this.agenda.getRdv().get(index);
+        rdv = this.Popup_rdv(rdv.getDate().toString(), rdv.getH_start().toString(), rdv.getH_end().toString());
+        this.agenda.getRdv().set(index, rdv);
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
         RendezVous rdv;
         switch (e.getActionCommand()){
             case "add":
                 System.out.println("Add !!!!");
-                rdv = Popup_add_rdv();
-                this.agenda.add_rdv(rdv);
+                this.Popup_rdv();
                 break;
             case "delete":
                 System.out.println("delete");
-                DeleteRdv();
+                this.DeleteRdv();
                 break;
+            case "edit":
+                System.out.println("edit");
+                this.edit_rdv();
+                
+                
                 
         }
         this.Traiter_Agenda(this.agenda);
