@@ -30,15 +30,15 @@ public class Calendar {
         //rdv init
         
         RendezVous rdv1 = new RendezVous("2018-12-18","17:00","17:30");
-        //RendezVous rdv2 = new RendezVous("2018-12-17","17:00","17:30");
-        //RendezVous rdv3 = new RendezVous("2018-12-16","17:00","17:30");
+        RendezVous rdv2 = new RendezVous("2018-12-17","17:00","17:30");
+        RendezVous rdv3 = new RendezVous("2018-12-16","17:00","17:30");
         
         //TODO find agenda on disk
         // list rdv init
         ArrayList<RendezVous> rdvs = new ArrayList<>();
         rdvs.add(rdv1);
-        //rdvs.add(rdv2);    
-        //rdvs.add(rdv3);
+        rdvs.add(rdv2);    
+        rdvs.add(rdv3);
         rdvs.get(0).setLabel("Le deuxième :)");
         
         
@@ -48,11 +48,11 @@ public class Calendar {
         //agendas = Agenda.get_save();
         agendas.add(new Agenda("Florian",rdvs));
 
-        menu_agenda(agendas);
+        //menu_agenda(agendas);
         Agenda agend;
-        //Affichage window = new Affichage() ;
-        //agend = Affichage.Menu_select_agenda(agendas);
-        //window.Traiter_Agenda(agend);
+        Affichage window = new Affichage() ;
+        agend = Affichage.Menu_select_agenda(agendas);
+        window.Traiter_Agenda(agend);
     }
     public static void menu_agenda(ArrayList<Agenda> agendas) throws IOException{      
         Scanner scan = new Scanner(System.in);
@@ -204,6 +204,7 @@ public class Calendar {
                     
                 case 6 : /* RDv entre 2 date */ 
                     btween2d(rdv); 
+                    break;
         
                 case 7: 
                     status = 1;

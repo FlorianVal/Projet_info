@@ -45,6 +45,21 @@ public class Agenda implements Serializable{
         return rdv;
     }
     
+    public void add_rdv(RendezVous rdv){
+        this.rdv.add(rdv);
+    }
+    
+    public void remove_rdv(int index){
+        this.rdv.remove(index);
+    }
+    
+    public RendezVous[] getRdvList(){
+        RendezVous rdvs[] = new RendezVous[this.rdv.size()];
+        for(int i=0; i<this.rdv.size(); i++)
+            rdvs[i] = this.rdv.get(i);
+        return rdvs;
+    }
+    
     public static void save_agenda(ArrayList<Agenda> agend) throws IOException {
         File file = new File("agendas_save.txt");
         file.delete();

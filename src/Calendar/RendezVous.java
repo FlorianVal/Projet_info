@@ -96,7 +96,7 @@ public class RendezVous implements Serializable {
 
     @Override
     public String toString() {
-        return "date=" + date + ", h_start=" + h_start + ", h_end=" + h_end + ", label=" + label + ", reminder=" + reminder  + ", times=" + TimeSTAMP    ;
+        return "date=" + date + ", h_start=" + h_start + ", h_end=" + h_end + ", label=" + label  ;
     }
 
     public static long date_to_timestamp(LocalDate date, LocalTime h_start) {
