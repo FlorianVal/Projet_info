@@ -3,13 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package Calendar;
+import static Calendar.Sortbydate.TrieRDV;
+import static Calendar.Sortbydate.btween2d;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
@@ -23,11 +31,12 @@ import javax.swing.event.ListSelectionListener;
  *
  * @author florianvalade
  */
-public class Affichage extends JFrame implements ActionListener, ListSelectionListener{
+
+public class Affichage extends JFrame implements ActionListener, ListSelectionListener, WindowListener{
     private int width;
     private int height;
     Agenda agenda;
-    JPanel pan = new JPanel(new GridLayout(2,0));
+    JPanel pan = new JPanel();
     JButton bouton_add ;
     JButton bouton_edit ;
     JButton bouton_delete ;
@@ -51,15 +60,26 @@ public class Affichage extends JFrame implements ActionListener, ListSelectionLi
         this.setTitle("Agenda");
         this.setSize(width,height);
         this.setLocationRelativeTo(null);
+        this.addWindowListener(this);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);            
         this.setContentPane(pan);
         this.setVisible(true);
-
-
     }
     
+    public Agenda Create_agenda(){
+        JOptionPane jop = new JOptionPane();        
+        String name = (String)jop.showInputDialog(this.pan,
+                        "Entrez votre nom:", null);
+        Agenda agend = new Agenda(name);
+        return agend;
+    }
     
-    public static Agenda Menu_select_agenda(ArrayList<Agenda> agendas){
+    public Agenda Menu_select_agenda(ArrayList<Agenda> agendas){
+        if(agendas.size() == 0){
+            //create new agenda
+            agendas.add(this.Create_agenda());
+            System.out.println(agendas.size());
+        }
         // Transform array list to tab
         String[] agend = new String[agendas.size()];
         for(int i = 0; i<agendas.size(); i++){
@@ -89,7 +109,9 @@ public class Affichage extends JFrame implements ActionListener, ListSelectionLi
         this.pan.add(bouton_edit);
         this.pan.add(bouton_delete);
         this.agenda = agenda;
-        this.list = new JList(agenda.getRdvList());
+        List<RendezVous> rdvs = TrieRDV(this.agenda.getRdv());
+        RendezVous[] rdv_tab = Agenda.getRdvList(rdvs);
+        this.list = new JList(rdv_tab);
         this.list.addListSelectionListener(this);
         this.list.setAutoscrolls(true);
         this.pan.setBackground(Color.red);
@@ -151,5 +173,43 @@ public class Affichage extends JFrame implements ActionListener, ListSelectionLi
     @Override
     public void valueChanged(ListSelectionEvent e) {
         System.out.println(this.list.getSelectedIndex());
+    }
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+        System.out.println("open window");
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+        System.out.println("Saving...");
+        System.out.println(this.agenda.getUsername());
+        try {
+            Agenda.save_agenda(this.agenda);
+        } catch (IOException ex) {
+            Logger.getLogger(Affichage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("Done");
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+        System.out.println("is closed");
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
     }
 }

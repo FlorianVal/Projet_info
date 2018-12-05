@@ -1,3 +1,4 @@
 *.class
 /dist/
 build/built-jar.properties
+agendas_save.txt

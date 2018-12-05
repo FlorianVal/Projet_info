@@ -24,8 +24,8 @@ class Sortbydate implements Comparator<RendezVous> {
         return (int)(a.getTimeSTAMP() - b.getTimeSTAMP()); 
        
              }
-        
-        public static void TrieRDV (List<RendezVous> rdv) {
+
+        public static List<RendezVous> TrieRDV (List<RendezVous> rdv) {
              Collections.sort(rdv, new Sortbydate());
         
             System.out.println( "\nSorted by date");
@@ -33,6 +33,7 @@ class Sortbydate implements Comparator<RendezVous> {
             {
                 System.out.println(rdv.get(i));
             }
+            return rdv;
           
         }
         

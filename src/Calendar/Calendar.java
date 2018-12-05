@@ -29,29 +29,30 @@ public class Calendar {
     public static void main(String[] args) throws IOException {
         //rdv init
         
-        RendezVous rdv1 = new RendezVous("2018-12-18","17:00","17:30");
-        RendezVous rdv2 = new RendezVous("2018-12-17","17:00","17:30");
-        RendezVous rdv3 = new RendezVous("2018-12-16","17:00","17:30");
+        //RendezVous rdv1 = new RendezVous("2018-12-18","17:00","17:30");
+        //RendezVous rdv2 = new RendezVous("2018-12-17","17:00","17:30");
+        //RendezVous rdv3 = new RendezVous("2018-12-16","17:00","17:30");
         
         //TODO find agenda on disk
         // list rdv init
-        ArrayList<RendezVous> rdvs = new ArrayList<>();
-        rdvs.add(rdv1);
-        rdvs.add(rdv2);    
-        rdvs.add(rdv3);
-        rdvs.get(0).setLabel("Le deuxième :)");
+        //ArrayList<RendezVous> rdvs = new ArrayList<>();
+        //rdvs.add(rdv1);
+        //rdvs.add(rdv2);    
+        //rdvs.add(rdv3);
+        //rdvs.get(0).setLabel("Le deuxième :)");
         
         
 
         //init agenda list
         ArrayList<Agenda> agendas = new ArrayList<>();
-        //agendas = Agenda.get_save();
-        agendas.add(new Agenda("Florian",rdvs));
+        agendas = Agenda.get_save();
+        System.out.println(agendas.size());
+        //agendas.add(new Agenda("Florian",rdvs));
 
         //menu_agenda(agendas);
         Agenda agend;
         Affichage window = new Affichage() ;
-        agend = Affichage.Menu_select_agenda(agendas);
+        agend = window.Menu_select_agenda(agendas);
         window.Traiter_Agenda(agend);
     }
     public static void menu_agenda(ArrayList<Agenda> agendas) throws IOException{      
