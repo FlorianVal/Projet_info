@@ -51,8 +51,8 @@ public class Calendar {
 
         //menu_agenda(agendas);
         Agenda agend;
-        Affichage window = new Affichage() ;
-        agend = window.Menu_select_agenda(agendas);
+        Affichage window = new Affichage(agendas) ;
+        agend = window.Menu_select_agenda();
         window.Traiter_Agenda(agend);
     }
     public static void menu_agenda(ArrayList<Agenda> agendas) throws IOException{      

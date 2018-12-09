@@ -35,6 +35,7 @@ import javax.swing.event.ListSelectionListener;
 public class Affichage extends JFrame implements ActionListener, ListSelectionListener, WindowListener{
     private int width;
     private int height;
+    ArrayList<Agenda> agendas;
     Agenda agenda;
     JPanel pan = new JPanel();
     JButton bouton_add ;
@@ -44,7 +45,8 @@ public class Affichage extends JFrame implements ActionListener, ListSelectionLi
 
 
 
-    public Affichage() {
+    public Affichage(ArrayList<Agenda> agendas) {
+        this.agendas = agendas;
         this.bouton_add = new JButton("Add RDV");
         this.bouton_edit = new JButton("edit RDV");
         this.bouton_delete = new JButton("delete RDV");     
@@ -80,24 +82,24 @@ public class Affichage extends JFrame implements ActionListener, ListSelectionLi
         return agend;
     }
     
-    public Agenda Menu_select_agenda(ArrayList<Agenda> agendas){
+    public Agenda Menu_select_agenda(){
         String nom = null;   
         Agenda new_agenda = null;
 
         while(nom == null || nom.equals("Creer un nouvel agenda")){
-        while(agendas.size() == 0){
+        while(this.agendas.size() == 0){
             //create new agenda
             new_agenda = this.Create_agenda();
             if(new_agenda != null){
-                agendas.add(new_agenda);}
-            System.out.println(agendas.size());
+                this.agendas.add(new_agenda);}
+            System.out.println(this.agendas.size());
         }
         // Transform array list to tab
-        String[] agend = new String[agendas.size() +1];
-        for(int i = 0; i<agendas.size(); i++){
-            agend[i] = agendas.get(i).getUsername();
+        String[] agend = new String[this.agendas.size() +1];
+        for(int i = 0; i<this.agendas.size(); i++){
+            agend[i] = this.agendas.get(i).getUsername();
         }
-        agend[agendas.size()] = "Creer un nouvel agenda";
+        agend[this.agendas.size()] = "Creer un nouvel agenda";
         // show menu swing
         JOptionPane jop = new JOptionPane();
         nom = (String)jop.showInputDialog(null, 
@@ -113,11 +115,11 @@ public class Affichage extends JFrame implements ActionListener, ListSelectionLi
         }
         if(nom.equals("Creer un nouvel agenda")){
             Agenda new_agend = this.Create_agenda();
-            agendas.add(new_agend);
+            this.agendas.add(new_agend);
         }}
-        for (int i = 0; i<agendas.size(); i++) {
-            if(agendas.get(i).getUsername() == nom)
-                return agendas.get(i);
+        for (int i = 0; i<this.agendas.size(); i++) {
+            if(this.agendas.get(i).getUsername() == nom)
+                return this.agendas.get(i);
         }
         return null;
     }
@@ -205,7 +207,7 @@ public class Affichage extends JFrame implements ActionListener, ListSelectionLi
         System.out.println("Saving...");
         System.out.println(this.agenda.getUsername());
         try {
-            Agenda.save_agenda(this.agenda);
+            Agenda.save_agenda(this.agendas);
         } catch (IOException ex) {
             Logger.getLogger(Affichage.class.getName()).log(Level.SEVERE, null, ex);
         }
