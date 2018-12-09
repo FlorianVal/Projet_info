@@ -192,7 +192,7 @@ public class Affichage extends JFrame implements ActionListener, ListSelectionLi
         String new_Hend = (String)jop.showInputDialog(this.pan,
                         "Heure de fin: hh:mm", Hend);
         String new_label = (String)jop.showInputDialog(this.pan,
-                        "Label: ", label);
+                        "Label:", label);
         int n = JOptionPane.showConfirmDialog(
             this.pan,
             "rappel ?",

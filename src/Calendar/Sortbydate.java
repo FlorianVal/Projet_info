@@ -57,7 +57,7 @@ class Sortbydate implements Comparator<RendezVous> {
         }
         
         
-            public static void Flitre(List<RendezVous> rdv) {   
+            public static void Filtre(List<RendezVous> rdv) {   
             int choix;
             Scanner scan = new Scanner(System.in); 
             
@@ -65,20 +65,39 @@ class Sortbydate implements Comparator<RendezVous> {
                 choix = scan.nextInt(); 
                 
                 switch(choix){
-                    case 1:
-                         //Filtre selon date 
+                    case 1: //Filtre selon date 
                         System.out.println("Veuillew entrée une date sous le format yyyy-mm-dd");
                         String date; 
                         date = scan.next(); 
                         
-                        for ( int i=0; i < rdv.size(); i++)
+                        for ( int i=0; i < rdv.size(); i++){
+                            
                             if ( rdv.get(i).getDate().equals(LocalDate.parse(date))){
                                 System.out.println(rdv.get(i).toString());
                             }
+                        }
+                            break; 
+                    case 2 : // Filtre selon libellé 
+                         System.out.println("Veuillew entrée un libelle");
+                         String label;
+                         label = scan.next(); 
+                         
+                         for (int i=0; i<rdv.size() ; i++ ) {
+                             if (rdv.get(i).getLabel().equals(label)){
+                                System.out.println(rdv.get(i).toString());
+                             }
+                         }
+                         break; 
+                         
+                    default : 
+                        System.out.println("Aucun filtre n'a été choisit ");
+                        break; 
                         
-                 }
+                   }
+                   
+            }
                  
-            }        
-    }
+   }        
+    
     
         
