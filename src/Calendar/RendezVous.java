@@ -64,6 +64,10 @@ public class RendezVous implements Serializable {
         return h_start;
     }
 
+    public boolean isReminder() {
+        return reminder;
+    }
+
     public LocalTime getH_end() {
         return h_end;
     }
@@ -96,7 +100,7 @@ public class RendezVous implements Serializable {
 
     @Override
     public String toString() {
-        return "date=" + date + ", h_start=" + h_start + ", h_end=" + h_end + ", label=" + label  ;
+        return "date=" + date + ", h_start=" + h_start + ", h_end=" + h_end + ", label=" + label + " " + reminder;
     }
 
     public static long date_to_timestamp(LocalDate date, LocalTime h_start) {

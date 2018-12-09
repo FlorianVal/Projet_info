@@ -46,7 +46,11 @@ public class Agenda implements Serializable{
     }
     
     public void add_rdv(RendezVous rdv){
-        this.rdv.add(rdv);
+        if(!rdv.check_avaibility(this.rdv)){
+            System.out.println("Un rendez vous est sur ce créneau !");
+        }else{ 
+            this.rdv.add(rdv);
+        }
     }
     
     public void remove_rdv(int index){

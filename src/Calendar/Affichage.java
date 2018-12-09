@@ -16,6 +16,8 @@ import java.awt.event.WindowListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -131,6 +133,15 @@ public class Affichage extends JFrame implements ActionListener, ListSelectionLi
         this.pan.add(bouton_edit);
         this.pan.add(bouton_delete);
         this.agenda = agenda;
+        //check reminder
+        for(int i = 0; i<agenda.getRdv().size(); i ++){
+            if(agenda.getRdv().get(i).isReminder()){
+                if(LocalDate.now().equals(agenda.getRdv().get(i).getDate())){
+                    System.out.println("Same day !!!!!!");
+                    // TODO verif date 
+                }
+            }
+        }
         List<RendezVous> rdvs = TrieRDV(this.agenda.getRdv());
         RendezVous[] rdv_tab = Agenda.getRdvList(rdvs);
         this.list = new JList(rdv_tab);
@@ -143,10 +154,10 @@ public class Affichage extends JFrame implements ActionListener, ListSelectionLi
     }
     
     public void Popup_rdv(){
-        this.agenda.add_rdv(this.Popup_rdv(null,null,null));
+        this.agenda.add_rdv(this.Popup_rdv(null,null,null,null));
     }
     
-    public RendezVous Popup_rdv(String date, String Hstart, String Hend){
+    public RendezVous Popup_rdv(String date, String Hstart, String Hend, String label){
         //do popup to create rdv
         JOptionPane jop = new JOptionPane();        
         String new_date = (String)jop.showInputDialog(this.pan,
@@ -155,7 +166,18 @@ public class Affichage extends JFrame implements ActionListener, ListSelectionLi
                         "Heure de début:", Hstart);
         String new_Hend = (String)jop.showInputDialog(this.pan,
                         "Heure de fin:", Hend);
-        RendezVous rdv = new RendezVous(new_date,new_Hstart,new_Hend);
+        String new_label = (String)jop.showInputDialog(this.pan,
+                        "Label:", label);
+        int n = JOptionPane.showConfirmDialog(
+            this.pan,
+            "rappel ?",
+            null,
+            JOptionPane.YES_NO_OPTION); 
+        boolean new_reminder = false;
+        if(n == 0){
+            new_reminder = true;
+        }
+    RendezVous rdv = new RendezVous(new_date,new_Hstart,new_Hend,new_label,new_reminder);
         return rdv;
     }
     
@@ -167,7 +189,7 @@ public class Affichage extends JFrame implements ActionListener, ListSelectionLi
     public void edit_rdv(){
         int index = this.list.getSelectedIndex();
         RendezVous rdv = this.agenda.getRdv().get(index);
-        rdv = this.Popup_rdv(rdv.getDate().toString(), rdv.getH_start().toString(), rdv.getH_end().toString());
+        rdv = this.Popup_rdv(rdv.getDate().toString(), rdv.getH_start().toString(), rdv.getH_end().toString(), rdv.getLabel());
         this.agenda.getRdv().set(index, rdv);
     }
     @Override
