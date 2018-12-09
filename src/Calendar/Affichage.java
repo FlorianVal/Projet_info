@@ -247,12 +247,16 @@ public class Affichage extends JFrame implements ActionListener, ListSelectionLi
                 count =+1;
             }
         }
-        String rdvs = "";
+        String rdvs = "\n";
+        if(count > 0){
         for(int i =0;i<filtered_rdv.length;i++){
             rdvs += filtered_rdv[i].toString();
-            rdvs += "\n";}
-        JOptionPane.showMessageDialog(this.pan, "rdv trouvé :"+ rdvs);
-
+            rdvs += "\n";}}
+        if(rdvs !="\n"){
+        JOptionPane.showMessageDialog(this.pan, "rdv trouvé :"+ rdvs);}
+        else{
+            JOptionPane.showMessageDialog(this.pan, "Aucun rdv trouvé !");
+        }
     }
     
     @Override
