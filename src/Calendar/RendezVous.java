@@ -43,8 +43,7 @@ public class RendezVous implements Serializable {
 
     }
     
-
- 
+            
     /**
      *
      * @param date
