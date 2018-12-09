@@ -24,7 +24,7 @@ public class Agenda implements Serializable{
 
     public Agenda(String username) {
         this.username = username;
-        this.rdv = new ArrayList<>();
+        this.rdv = new ArrayList<RendezVous>();
     }
 
     public Agenda(String username, ArrayList<RendezVous> rdv) {
