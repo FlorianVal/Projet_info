@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -43,6 +44,7 @@ public class Affichage extends JFrame implements ActionListener, ListSelectionLi
     JButton bouton_add ;
     JButton bouton_edit ;
     JButton bouton_delete ;
+    JButton bouton_tri;
     JList list;
 
     /**
@@ -51,14 +53,17 @@ public class Affichage extends JFrame implements ActionListener, ListSelectionLi
      */
     public Affichage(ArrayList<Agenda> agendas) {
         this.agendas = agendas;
+        this.bouton_tri = new JButton("Chercher les rdvs entre 2 dates");
         this.bouton_add = new JButton("Add RDV");
         this.bouton_edit = new JButton("edit RDV");
         this.bouton_delete = new JButton("delete RDV");     
         this.list = new JList();
         bouton_add.addActionListener(this);
+        bouton_tri.addActionListener(this);
         bouton_edit.addActionListener(this);
         bouton_delete.addActionListener(this);
         bouton_add.setActionCommand("add");
+        bouton_tri.setActionCommand("tri");
         bouton_edit.setActionCommand("edit");
         bouton_delete.setActionCommand("delete");
         this.width = 800;
@@ -142,16 +147,19 @@ public class Affichage extends JFrame implements ActionListener, ListSelectionLi
      */
     public void Traiter_Agenda(Agenda agenda){
         this.pan.removeAll();
-        this.pan.setBackground(Color.ORANGE); 
         this.pan.add(bouton_add);
         this.pan.add(bouton_edit);
         this.pan.add(bouton_delete);
+        this.pan.add(bouton_tri);
         this.agenda = agenda;
         //check reminder
         for(int i = 0; i<agenda.getRdv().size(); i ++){
             if(agenda.getRdv().get(i).isReminder()){
                 if(LocalDate.now().equals(agenda.getRdv().get(i).getDate())){
-                    System.out.println("Same day !!!!!!");
+                    // check if rdv is in 15 min or less
+                    if(LocalTime.now().isBefore(agenda.getRdv().get(i).getH_start()) && LocalTime.now().plusMinutes(15).isAfter(agenda.getRdv().get(i).getH_start())){
+                        JOptionPane.showMessageDialog(this.pan, "Rappel :"+agenda.getRdv().get(i).toString());
+                    }
                     // TODO verif date 
                 }
             }
@@ -224,6 +232,29 @@ public class Affichage extends JFrame implements ActionListener, ListSelectionLi
         rdv = this.Popup_rdv(rdv.getDate().toString(), rdv.getH_start().toString(), rdv.getH_end().toString(), rdv.getLabel());
         this.agenda.getRdv().set(index, rdv);
     }
+    
+    public void tri_rdv(){
+        RendezVous[] filtered_rdv = new RendezVous[this.agenda.getRdv().size()];
+        int count = 0;
+        JOptionPane jop = new JOptionPane();        
+        String date1 = (String)jop.showInputDialog(this.pan,
+                        "Première date: aaaa-mm-jj", null);
+        String date2 = (String)jop.showInputDialog(this.pan,
+                        "Seconde date: aaaa-mm-jj", null);
+        for(int i =0;i< this.agenda.getRdv().size(); i++){
+            if(LocalDate.parse(date1).isBefore(this.agenda.getRdv().get(i).getDate()) && LocalDate.parse(date2).isAfter(this.agenda.getRdv().get(i).getDate())){
+                filtered_rdv[count] = this.agenda.getRdv().get(i);
+                count =+1;
+            }
+        }
+        String rdvs = "";
+        for(int i =0;i<filtered_rdv.length;i++){
+            rdvs += filtered_rdv[i].toString();
+            rdvs += "\n";}
+        JOptionPane.showMessageDialog(this.pan, "rdv trouvé :"+ rdvs);
+
+    }
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         RendezVous rdv;
@@ -239,6 +270,9 @@ public class Affichage extends JFrame implements ActionListener, ListSelectionLi
             case "edit":
                 System.out.println("edit");
                 this.edit_rdv();
+            case "tri":
+                System.out.println("TRI !");
+                this.tri_rdv();
                 
                 
                 
