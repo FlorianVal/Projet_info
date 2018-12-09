@@ -70,14 +70,23 @@ public class Affichage extends JFrame implements ActionListener, ListSelectionLi
         JOptionPane jop = new JOptionPane();        
         String name = (String)jop.showInputDialog(this.pan,
                         "Entrez votre nom:", null);
-        Agenda agend = new Agenda(name);
+        Agenda agend;
+        if(name != null){
+        agend = new Agenda(name);
+        }
+        else{
+            agend = null;
+        }
         return agend;
     }
     
     public Agenda Menu_select_agenda(ArrayList<Agenda> agendas){
-        if(agendas.size() == 0){
+        Agenda new_agenda = null;
+        while(agendas.size() == 0){
             //create new agenda
-            agendas.add(this.Create_agenda());
+            new_agenda = this.Create_agenda();
+            if(new_agenda != null){
+                agendas.add(new_agenda);}
             System.out.println(agendas.size());
         }
         // Transform array list to tab
@@ -95,6 +104,7 @@ public class Affichage extends JFrame implements ActionListener, ListSelectionLi
             agend,
             agend[0]);
         // get back to array index
+
         for (int i = 0; i<agendas.size(); i++) {
             if(agendas.get(i).getUsername() == nom)
                 return agendas.get(i);

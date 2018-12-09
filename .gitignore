@@ -2,3 +2,6 @@
 /dist/
 build/built-jar.properties
 agendas_save.txt
+*.xml
+nbproject/private/private.properties
+agendas_save.txt
