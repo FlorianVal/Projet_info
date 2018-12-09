@@ -15,7 +15,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 /**
- *
+ * Classe de gestion des rendez vous contenu dans les agendas.
  * @author florianvalade
  */
 
@@ -27,6 +27,12 @@ public class RendezVous implements Serializable {
     private boolean reminder;
     private long TimeSTAMP; 
     
+    /**
+     *
+     * @param date
+     * @param h_start
+     * @param h_end
+     */
     public RendezVous(String date, String h_start, String h_end) {
         this.date = LocalDate.parse(date);
         this.h_start = LocalTime.parse(h_start);
@@ -36,64 +42,122 @@ public class RendezVous implements Serializable {
         this.TimeSTAMP = RendezVous.date_to_timestamp(this.date, this.h_start); 
 
     }
+    
+
  
+    /**
+     *
+     * @param date
+     * @param h_start
+     * @param h_end
+     * @param reminder
+     */
     public RendezVous(String date, String h_start, String h_end, boolean reminder) {
         this(date, h_start, h_end);
         this.reminder = reminder;
     }
 
+    /**
+     *
+     * @param date
+     * @param h_start
+     * @param h_end
+     * @param label
+     * @param reminder
+     */
     public RendezVous(String date, String h_start, String h_end, String label, boolean reminder) {
         this(date, h_start, h_end, reminder);
         this.label = label;
     }
     
-
+    /**
+     *
+     * @return
+     */
     public String getLabel() {
         return label;
     }
 
+    /**
+     *
+     * @return
+     */
     public long getTimeSTAMP() {
         return TimeSTAMP;
     }
 
+    /**
+     *
+     * @return
+     */
     public LocalDate getDate() {
         return date;
     }
 
+    /**
+     *
+     * @return
+     */
     public LocalTime getH_start() {
         return h_start;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isReminder() {
         return reminder;
     }
 
+    /**
+     *
+     * @return
+     */
     public LocalTime getH_end() {
         return h_end;
     }
 
+    /**
+     *
+     * @param date
+     */
     public void setDate(LocalDate date) {
         this.date = date;
         this.TimeSTAMP = RendezVous.date_to_timestamp(this.date, this.h_start); 
 
     }
 
+    /**
+     *
+     * @param h_start
+     */
     public void setH_start(LocalTime h_start) {
         this.h_start = h_start;
         this.TimeSTAMP = RendezVous.date_to_timestamp(this.date, this.h_start); 
 
     }
 
+    /**
+     *
+     * @param h_end
+     */
     public void setH_end(LocalTime h_end) {
         this.h_end = h_end;
     }
 
+    /**
+     *
+     * @param reminder
+     */
     public void setReminder(boolean reminder) {
         this.reminder = reminder;
     }
    
-   
-
+    /**
+     *
+     * @param label
+     */
     public void setLabel(String label) {
         this.label = label;
     }
@@ -103,6 +167,12 @@ public class RendezVous implements Serializable {
         return "date=" + date + ", h_start=" + h_start + ", h_end=" + h_end + ", label=" + label + " " + reminder;
     }
 
+    /**
+     *
+     * @param date
+     * @param h_start
+     * @return
+     */
     public static long date_to_timestamp(LocalDate date, LocalTime h_start) {
         try{
                       
@@ -122,6 +192,12 @@ public class RendezVous implements Serializable {
                 }
     }
     //check if there is another rdv on the same hour
+
+    /**
+     *
+     * @param rdvs
+     * @return
+     */
     public boolean check_avaibility(ArrayList<RendezVous> rdvs){
         for(int i = 0; i< rdvs.size(); i++){
             // check if one rdv in the list has the same date
@@ -141,12 +217,24 @@ public class RendezVous implements Serializable {
         return true;
     }
     
+    /**
+     *
+     * @param rdvs
+     * @param criteria
+     * @return
+     */
     static public ArrayList<RendezVous> get_rdvs_with_criteria(ArrayList<RendezVous> rdvs, String criteria){
         ArrayList<RendezVous> rdvs_filtered;
         for(int i =0; i<rdvs.size(); i++){
         }
         return rdvs;
     }
+
+    /**
+     *
+     * @param date
+     * @return
+     */
     static public boolean CheckDate(LocalDate date){
         if (date.isBefore(LocalDate.now())){
                 System.out.print("Date given is before today's date\n");

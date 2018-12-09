@@ -14,7 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Classe de gestion des differents Agenda utilisateurs 
  * @author florianvalade
  */
 
@@ -22,11 +22,20 @@ public class Agenda implements Serializable{
     private String username;
     private ArrayList<RendezVous> rdv;
 
+    /**
+     *
+     * @param username
+     */
     public Agenda(String username) {
         this.username = username;
         this.rdv = new ArrayList<RendezVous>();
     }
 
+    /**
+     *
+     * @param username
+     * @param rdv
+     */
     public Agenda(String username, ArrayList<RendezVous> rdv) {
         this.username = username;
         this.rdv = rdv;
@@ -37,14 +46,26 @@ public class Agenda implements Serializable{
         return "Agenda{" + "username=" + username + ", rdv=" + rdv + '}';
     }
 
+    /**
+     *
+     * @return
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<RendezVous> getRdv() {
         return rdv;
     }
     
+    /**
+     *
+     * @param rdv
+     */
     public void add_rdv(RendezVous rdv){
         if(!rdv.check_avaibility(this.rdv)){
             System.out.println("Un rendez vous est sur ce créneau !");
@@ -53,10 +74,18 @@ public class Agenda implements Serializable{
         }
     }
     
+    /**
+     *
+     * @param index
+     */
     public void remove_rdv(int index){
         this.rdv.remove(index);
     }
     
+    /**
+     *
+     * @return
+     */
     public RendezVous[] getRdvList(){
         RendezVous rdvs[] = new RendezVous[this.rdv.size()];
         for(int i=0; i<this.rdv.size(); i++)
@@ -64,12 +93,24 @@ public class Agenda implements Serializable{
         return rdvs;
     }
     
+    /**
+     *
+     * @param rdv_array
+     * @return
+     */
     public static RendezVous[] getRdvList(List<RendezVous> rdv_array){
         RendezVous rdvs[] = new RendezVous[rdv_array.size()];
         for(int i=0; i<rdv_array.size(); i++)
             rdvs[i] = rdv_array.get(i);
         return rdvs;
     }
+
+    /**
+     *
+     * @param agend
+     * @return
+     * @throws IOException
+     */
     public static boolean save_agenda(Agenda agend) throws IOException{
     ArrayList<Agenda> agendas = new ArrayList<>();
         try {
@@ -94,6 +135,11 @@ public class Agenda implements Serializable{
     
     }
     
+    /**
+     *
+     * @param agend
+     * @throws IOException
+     */
     public static void save_agenda(ArrayList<Agenda> agend) throws IOException {
         File file = new File("agendas_save.txt");
         file.delete();
@@ -105,6 +151,11 @@ public class Agenda implements Serializable{
         out.flush();  
     }
     
+    /**
+     *
+     * @return
+     * @throws IOException
+     */
     public static ArrayList<Agenda> get_save() throws IOException {
         ArrayList<Agenda> agendas;
         try {

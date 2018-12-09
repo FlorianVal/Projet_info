@@ -45,8 +45,10 @@ public class Affichage extends JFrame implements ActionListener, ListSelectionLi
     JButton bouton_delete ;
     JList list;
 
-
-
+    /**
+     *
+     * @param agendas
+     */
     public Affichage(ArrayList<Agenda> agendas) {
         this.agendas = agendas;
         this.bouton_add = new JButton("Add RDV");
@@ -70,6 +72,10 @@ public class Affichage extends JFrame implements ActionListener, ListSelectionLi
         this.setVisible(true);
     }
     
+    /**
+     *
+     * @return
+     */
     public Agenda Create_agenda(){
         JOptionPane jop = new JOptionPane();        
         String name = (String)jop.showInputDialog(this.pan,
@@ -84,6 +90,10 @@ public class Affichage extends JFrame implements ActionListener, ListSelectionLi
         return agend;
     }
     
+    /**
+     *
+     * @return
+     */
     public Agenda Menu_select_agenda(){
         String nom = null;   
         Agenda new_agenda = null;
@@ -126,6 +136,10 @@ public class Affichage extends JFrame implements ActionListener, ListSelectionLi
         return null;
     }
     
+    /**
+     * Classe de gestion de l'interface graphique 
+     * @param agenda
+     */
     public void Traiter_Agenda(Agenda agenda){
         this.pan.removeAll();
         this.pan.setBackground(Color.ORANGE); 
@@ -153,10 +167,21 @@ public class Affichage extends JFrame implements ActionListener, ListSelectionLi
         //creer fenetre avec boutton et liste des rdvs
     }
     
+    /**
+     *
+     */
     public void Popup_rdv(){
         this.agenda.add_rdv(this.Popup_rdv(null,null,null,null));
     }
     
+    /**
+     *
+     * @param date
+     * @param Hstart
+     * @param Hend
+     * @param label
+     * @return
+     */
     public RendezVous Popup_rdv(String date, String Hstart, String Hend, String label){
         //do popup to create rdv
         JOptionPane jop = new JOptionPane();        
@@ -181,11 +206,18 @@ public class Affichage extends JFrame implements ActionListener, ListSelectionLi
         return rdv;
     }
     
+    /**
+     *
+     */
     public void DeleteRdv(){
         int index = this.list.getSelectedIndex();
         this.agenda.remove_rdv(index);
         this.Traiter_Agenda(this.agenda);
     }
+
+    /**
+     *
+     */
     public void edit_rdv(){
         int index = this.list.getSelectedIndex();
         RendezVous rdv = this.agenda.getRdv().get(index);

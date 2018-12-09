@@ -17,7 +17,7 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
- *
+ * Classe de gestion du calendrier avec les differents agenda et rendez vous qui y sont contenus.
  * @author florianvalade
  */
 public class Calendar {
@@ -26,6 +26,12 @@ public class Calendar {
      * @param args the command line arguments
      */
    static Agenda setAgenda;
+
+    /**
+     *
+     * @param args
+     * @throws IOException
+     */
     public static void main(String[] args) throws IOException {
         //rdv init
         
@@ -55,6 +61,12 @@ public class Calendar {
         agend = window.Menu_select_agenda();
         window.Traiter_Agenda(agend);
     }
+
+    /**
+     *
+     * @param agendas
+     * @throws IOException
+     */
     public static void menu_agenda(ArrayList<Agenda> agendas) throws IOException{      
         Scanner scan = new Scanner(System.in);
         int choix = 0;
@@ -127,6 +139,12 @@ public class Calendar {
         }
     }
     
+    /**
+     *
+     * @param rdv
+     * @param scan
+     * @return
+     */
     public static int menu_rdv(ArrayList<RendezVous> rdv, Scanner scan){
         int status = -1;
         int choix_rdv = 0;        
@@ -215,6 +233,11 @@ public class Calendar {
         return status;
     }
     
+    /**
+     *
+     * @param rdv
+     * @param scan
+     */
     public static void edit_rdv(RendezVous rdv, Scanner scan){
     //menu to choose what to changes
         int choice;
@@ -257,6 +280,11 @@ public class Calendar {
     
     }
     
+    /**
+     *
+     * @param agenda
+     * @return
+     */
     public static ArrayList<RendezVous> get_print_rdvs(Agenda agenda){
         ArrayList<RendezVous> rdv_agenda;
         rdv_agenda = agenda.getRdv();
