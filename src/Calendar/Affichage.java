@@ -186,13 +186,13 @@ public class Affichage extends JFrame implements ActionListener, ListSelectionLi
         //do popup to create rdv
         JOptionPane jop = new JOptionPane();        
         String new_date = (String)jop.showInputDialog(this.pan,
-                        "Date:", date);
+                        "Date: aaaa-mm-jj", date);
         String new_Hstart = (String)jop.showInputDialog(this.pan,
-                        "Heure de début:", Hstart);
+                        "Heure de début: hh:mm ", Hstart);
         String new_Hend = (String)jop.showInputDialog(this.pan,
-                        "Heure de fin:", Hend);
+                        "Heure de fin: hh:mm", Hend);
         String new_label = (String)jop.showInputDialog(this.pan,
-                        "Label:", label);
+                        "Label: ", label);
         int n = JOptionPane.showConfirmDialog(
             this.pan,
             "rappel ?",
