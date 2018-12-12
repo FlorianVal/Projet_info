@@ -274,10 +274,11 @@ public class Affichage extends JFrame implements ActionListener, ListSelectionLi
             case "edit":
                 System.out.println("edit");
                 this.edit_rdv();
+                break;
             case "tri":
                 System.out.println("TRI !");
                 this.tri_rdv();
-                
+                break;
                 
                 
         }
